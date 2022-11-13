@@ -1,0 +1,55 @@
+{
+  "orientation": "horizontal",
+  "cascade": [
+    {
+      "view": null
+    },
+    [
+      {
+        "relation": "equ",
+        "constant": "default",
+        "$parserOffset": 1
+      }
+    ],
+    {
+      "view": "find"
+    },
+    [
+      {
+        "relation": "equ",
+        "constant": "default",
+        "$parserOffset": 8
+      }
+    ],
+    {
+      "view": "findNext"
+    },
+    [
+      {
+        "relation": "equ",
+        "constant": "default",
+        "$parserOffset": 19
+      }
+    ],
+    {
+      "view": "findField",
+      "constraints": [
+        {
+          "relation": "geq",
+          "$parserOffset": 31,
+          "constant": 20
+        }
+      ]
+    },
+    [
+      {
+        "relation": "equ",
+        "constant": "default",
+        "$parserOffset": 37
+      }
+    ],
+    {
+      "view": null
+    }
+  ]
+}
