@@ -1,10 +1,16 @@
 package org.JAutoLayout;
 
+import org.JAutoLayout.AutoLayout.AutoLayout;
 import org.JAutoLayout.Parser.rekex.Grammar.VisualFormatString;
 import org.JAutoLayout.Parser.rekex.Parser;
+import org.JAutoLayout.Toolkit.Solver;
+import org.JAutoLayout.Toolkit.Variable;
+import org.openjdk.nashorn.internal.parser.JSONParser;
 import org.rekex.parser.PegParser;
 import org.rekex.parser.PegParserBuilder;
 
+import javax.swing.*;
+import java.awt.*;
 import java.nio.file.Path;
 
 public class Main {
@@ -39,11 +45,29 @@ public class Main {
 //                .build();
 
 //        PegParser<VisualFormatString> parser = new Parser();
+        JFrame frame = new JFrame("Cassowary Constraint Solver");
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setMinimumSize(frame.getSize());
 
+        // Close the application once the close button is clicked
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        MainUI mainUI = new MainUI(frame);
+        frame.add(mainUI.CenterComponent(), BorderLayout.CENTER);
+        frame.add(mainUI.WestComponent(), BorderLayout.WEST);
+        frame.pack();
+        frame.show();
+        //
+
+        frame.setLayout(new BorderLayout());
 
         PegParser<VisualFormatString> parser = PegParser.of(VisualFormatString.class);
         var res = parser.matchFull("|-[find]-[findNext]-[findField(>=20)]-|");
+
         System.out.println(res.view());
         System.out.println(res.connectionViews());
+    }
+
+    public void ReadJsonData(){
+//        JSONParser parser = new JSONParser();
     }
 }
