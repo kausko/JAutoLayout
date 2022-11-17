@@ -1,16 +1,23 @@
 package org.JAutoLayout;
 
+import com.eclipsesource.v8.V8;
 import org.JAutoLayout.AutoLayout.AutoLayout;
 import org.JAutoLayout.Parser.rekex.Grammar.VisualFormatString;
 import org.JAutoLayout.Parser.rekex.Parser;
-import org.JAutoLayout.Toolkit.Solver;
-import org.JAutoLayout.Toolkit.Variable;
+import org.JAutoLayout.kiwi.Solver;
+import org.JAutoLayout.kiwi.Symbolics;
+import org.JAutoLayout.kiwi.Variable;
 import org.openjdk.nashorn.internal.parser.JSONParser;
 import org.rekex.parser.PegParser;
 import org.rekex.parser.PegParserBuilder;
 
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileReader;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Main {
@@ -60,11 +67,45 @@ public class Main {
 
         frame.setLayout(new BorderLayout());
 
-        PegParser<VisualFormatString> parser = PegParser.of(VisualFormatString.class);
-        var res = parser.matchFull("|-[find]-[findNext]-[findField(>=20)]-|");
+//        PegParser<VisualFormatString> parser = PegParser.of(VisualFormatString.class);
+//        var res = parser.matchFull("|-[find]-[findNext]-[findField(>=20)]-|");
+//        System.out.println(res.view());
+//        System.out.println(res.connectionViews());
+//
+//        Solver solver = new Solver();
+//        Variable x = new Variable("x");
+//        Variable y = new Variable("y");
+//
+//        // x = 20
+//        solver.addConstraint(Symbolics.equals(x, 20));
+//
+//        // x + 2 == y + 10
+//        solver.addConstraint(Symbolics.equals(Symbolics.add(x,2), Symbolics.add(y, 10)));
+//
+//        solver.updateVariables();
+//        System.out.println("x " + x.getValue() + " y " + y.getValue());
 
-        System.out.println(res.view());
-        System.out.println(res.connectionViews());
+//        ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+//        engine.eval("load('nashorn:mozilla_compat.js')");
+//        engine.eval(new FileReader("src/main/java/org/JAutoLayout/autoLayout.js"));
+//        Object result = engine.eval("AutoLayout.VisualFormat.parse(\"|-[find]-[findNext]-[findField(>=20)]-|\")");
+//        System.out.println(result);
+
+        V8 v8 = V8.createV8Runtime();
+        v8.executeScript(Files.readString(Path.of("src/main/java/org/JAutoLayout/autoLayout.js")));
+        String result = v8.executeStringScript("""
+                var constraints = AutoLayout.VisualFormat.parse([
+                    "|-[child1(child3)]-[child3]-|",
+                    "|-[child2(child4)]-[child4]-|",
+                    "[child5(child4)]-|",
+                    "V:|-[child1(child2)]-[child2]-|",
+                    "V:|-[child3(child4,child5)]-[child4]-[child5]-|"
+                ]);
+                var view = new AutoLayout.View({constraints: constraints});
+                view.setSize(400, 400);
+                JSON.stringify(view.subViews)
+                """);
+        System.out.println(result);
     }
 
     public void ReadJsonData(){
