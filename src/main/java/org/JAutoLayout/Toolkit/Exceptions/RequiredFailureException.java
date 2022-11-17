@@ -1,4 +1,5 @@
 package org.JAutoLayout.Toolkit.Exceptions;
 
-public class RequiredFailureException extends Exception {
+
+public class RequiredFailureException extends KiwiException {
 }

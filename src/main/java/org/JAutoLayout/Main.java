@@ -1,22 +1,9 @@
 package org.JAutoLayout;
 
 import com.eclipsesource.v8.V8;
-import org.JAutoLayout.AutoLayout.AutoLayout;
-import org.JAutoLayout.Parser.rekex.Grammar.VisualFormatString;
-import org.JAutoLayout.Parser.rekex.Parser;
-import org.JAutoLayout.kiwi.Solver;
-import org.JAutoLayout.kiwi.Symbolics;
-import org.JAutoLayout.kiwi.Variable;
-import org.openjdk.nashorn.internal.parser.JSONParser;
-import org.rekex.parser.PegParser;
-import org.rekex.parser.PegParserBuilder;
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 

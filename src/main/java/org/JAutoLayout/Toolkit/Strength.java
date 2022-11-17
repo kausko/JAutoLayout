@@ -1,29 +1,30 @@
 package org.JAutoLayout.Toolkit;
 
-public enum Strength {
-    REQUIRED(1000.0, 1000.0, 1000.0),
-    STRONG(1.0, 0.0, 0.0),
-    MEDIUM(0.0, 1.0, 0.0),
-    WEAK(0.0, 0.0, 1.0);
 
-    private double value;
+public class Strength {
 
-    Strength(double a, double b, double c, double w) {
-        value = 0.0;
-        value += Utils.clip(0.0, a * w, 1000.0) * 1000000.0;
-        value += Utils.clip(0.0, b * w, 1000.0) * 1000.0;
-        value += Utils.clip(0.0, c * w, 1000.0);
+    public static final double REQUIRED = create(1000.0, 1000.0, 1000.0);
+
+    public static final double STRONG = create(1.0, 0.0, 0.0);
+
+    public static final double MEDIUM = create(0.0, 1.0, 0.0);
+
+    public static final double WEAK = create(0.0, 0.0, 1.0);
+
+
+    public static final double create(double a, double b, double c, double w) {
+        double result = 0.0;
+        result += Math.max(0.0, Math.min(1000.0, a * w)) * 1000000.0;
+        result += Math.max(0.0, Math.min(1000.0, b * w)) * 1000.0;
+        result += Math.max(0.0, Math.min(1000.0, c * w));
+        return result;
     }
 
-    Strength(double a, double b, double c) {
-        this(a, b, c, 1.0);
+    public static final double create(double a, double b, double c) {
+        return create(a, b, c, 1.0);
     }
 
-    public double getValue() {
-        return value;
-    }
-
-    public static double clip(double value) {
-        return Utils.clip(0.0, value, REQUIRED.getValue());
+    public static final double clip(double value) {
+        return Math.max(0.0, Math.min(REQUIRED, value));
     }
 }

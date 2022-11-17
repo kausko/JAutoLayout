@@ -1,30 +1,35 @@
 package org.JAutoLayout.Toolkit;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
+
 
 public class Constraint {
-    private Expression expression;
-    private Relation relation;
-    private double strength;
 
-    public Constraint(Expression expression, Relation relation) {
-        this(expression, relation, Strength.REQUIRED.getValue());
+    private Expression expression;
+    private double strength;
+    private Relation op;
+
+    public Constraint(){
     }
 
-    public Constraint(Expression expression, Relation relation, double strength) {
-        this.expression = expression;
-        this.relation = relation;
+    public Constraint(Expression expr, Relation op) {
+        this(expr, op, Strength.REQUIRED);
+    }
+
+    public Constraint(Expression expr, Relation op, double strength) {
+        this.expression = reduce(expr);
+        this.op = op;
         this.strength = Strength.clip(strength);
     }
 
-    public Constraint(Constraint c, double strength) {
-        this(c.expression, c.relation, strength);
+    public Constraint(Constraint other, double strength) {
+        this(other.expression, other.op, strength);
     }
 
-    public static Expression reduce(Expression e) {
+    private static Expression reduce(Expression expr){
+
         return new Expression(
-                e
+                expr
                         .getTerms()
                         .stream()
                         .collect(
@@ -36,7 +41,7 @@ public class Constraint {
                         .stream()
                         .map(entry -> new Term(entry.getKey(), entry.getValue()))
                         .toList(),
-                e.getConstant()
+                expr.getConstant()
         );
     }
 
@@ -48,14 +53,6 @@ public class Constraint {
         this.expression = expression;
     }
 
-    public Relation getRelation() {
-        return relation;
-    }
-
-    public void setRelation(Relation relation) {
-        this.relation = relation;
-    }
-
     public double getStrength() {
         return strength;
     }
@@ -65,8 +62,17 @@ public class Constraint {
         return this;
     }
 
+    public Relation getOp() {
+        return op;
+    }
+
+    public void setOp(Relation op) {
+        this.op = op;
+    }
+
     @Override
     public String toString() {
-        return "expression: (" + expression + ") strength: " + strength + " relation: " + relation;
+        return "expression: (" + expression + ") strength: " + strength + " operator: " + op;
     }
+
 }

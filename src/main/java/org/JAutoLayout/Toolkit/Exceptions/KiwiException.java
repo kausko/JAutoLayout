@@ -1,4 +1,4 @@
-package org.JAutoLayout.kiwi;
+package org.JAutoLayout.Toolkit.Exceptions;
 
 /**
  * Created by alex on 30/01/16.

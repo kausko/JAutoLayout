@@ -1,15 +1,19 @@
 package org.JAutoLayout.Toolkit;
 
+
 public class Term {
+
     private Variable variable;
-    private double coefficient;
+    double coefficient;
 
     public Term(Variable variable, double coefficient) {
         this.variable = variable;
         this.coefficient = coefficient;
     }
 
-    public Term(Variable variable) { this(variable, 1.0);}
+    public Term(Variable variable) {
+        this(variable, 1.0);
+    }
 
     public Variable getVariable() {
         return variable;
@@ -33,6 +37,6 @@ public class Term {
 
     @Override
     public String toString() {
-        return "variable: " + variable + " coefficient: " + coefficient;
+        return "variable: (" + variable + ") coefficient: "  + coefficient;
     }
 }

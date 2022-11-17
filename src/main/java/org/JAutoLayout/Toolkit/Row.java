@@ -3,8 +3,11 @@ package org.JAutoLayout.Toolkit;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+
 public class Row {
+
     private double constant;
+
     private Map<Symbol, Double> cells = new LinkedHashMap<>();
 
     public Row() {
@@ -15,9 +18,9 @@ public class Row {
         this.constant = constant;
     }
 
-    public Row(Row row) {
-        this.cells = new LinkedHashMap<>(row.cells);
-        this.constant = row.constant;
+    public Row(Row other) {
+        this.cells = new LinkedHashMap<>(other.cells);
+        this.constant = other.constant;
     }
 
     public double getConstant() {
@@ -36,23 +39,27 @@ public class Row {
         this.cells = cells;
     }
 
-    double add(double value) { return this.constant += value; }
-
-    void insert(Symbol sym, double coefficient) {
-        var addedCoefficient = coefficient + cells.getOrDefault(sym, 0.0);
-        if (Utils.nearZero(addedCoefficient)) {
-            cells.remove(sym);
-        } else {
-            cells.put(sym, addedCoefficient);
-        }
+    double add(double value) {
+        return this.constant += value;
     }
 
-    void insert(Symbol sym) { insert(sym, 1.0); }
+    void insert(Symbol symbol, double coefficient) {
+        var addedCoefficient = coefficient + cells.getOrDefault(symbol, 0.0);
+        if (Utils.nearZero(addedCoefficient)) {
+            cells.remove(symbol);
+        } else {
+            cells.put(symbol, addedCoefficient);
+        }
+    }
+    void insert(Symbol symbol) {
+        insert(symbol, 1.0);
+    }
 
-    void insert(Row row, double coefficient) {
-        this.constant += row.constant * coefficient;
-        for (Symbol s : row.cells.keySet()) {
-            var coeff = row.cells.get(s) * coefficient;
+    void insert(Row other, double coefficient) {
+
+        this.constant += other.constant * coefficient;
+        for (Symbol s : other.cells.keySet()) {
+            var coeff = other.cells.get(s) * coefficient;
             this.cells.putIfAbsent(s, 0.0);
             var temp = this.cells.get(s) + coeff;
             this.cells.put(s, temp);
@@ -62,17 +69,20 @@ public class Row {
         }
     }
 
-    void insert(Row row) { insert(row, 1.0); }
+    void insert(Row other) {
+        insert(other, 1.0);
+    }
 
-    void remove(Symbol sym) { cells.remove(sym); }
+    void remove(Symbol symbol) { cells.remove(symbol); }
 
     void invertSign() {
         constant = -constant;
         cells.replaceAll((k, v) -> -v);
     }
 
-    void solve(Symbol sym) {
-        var coefficient = -1.0 / cells.remove(sym);
+    void solve(Symbol symbol) {
+        var coefficient = -1.0 / cells.get(symbol);
+        cells.remove(symbol);
         this.constant *= coefficient;
         cells.replaceAll((k, v) -> v * coefficient);
     }
@@ -81,12 +91,12 @@ public class Row {
         insert(lhs, -1.0);
         solve(rhs);
     }
+    double getCoefficient(Symbol symbol) { return cells.getOrDefault(symbol, 0.0);}
 
-    double getCoefficient(Symbol sym) { return cells.getOrDefault(sym, 0.0); }
-
-    void substitute(Symbol sym, Row row) {
-        if (cells.containsKey(sym)) {
-            insert(row, cells.remove(sym));
+    void substitute(Symbol symbol, Row row) {
+        if (cells.containsKey(symbol)) {
+            insert(row, cells.remove(symbol));
         }
     }
+
 }

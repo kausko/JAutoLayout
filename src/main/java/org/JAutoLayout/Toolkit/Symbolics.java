@@ -1,4 +1,6 @@
-package org.JAutoLayout.kiwi;
+package org.JAutoLayout.Toolkit;
+
+import org.JAutoLayout.Toolkit.Exceptions.NonlinearExpressionException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -233,7 +235,7 @@ public class Symbolics {
 
     // Expression relations
     public static Constraint equals(Expression first, Expression second) {
-        return new Constraint(subtract(first, second), RelationalOperator.OP_EQ);
+        return new Constraint(subtract(first, second), Relation.EQ);
     }
 
     public static Constraint equals(Expression expression, Term term) {
@@ -249,7 +251,7 @@ public class Symbolics {
     }
 
     public static Constraint lessThanOrEqualTo(Expression first, Expression second) {
-        return new Constraint(subtract(first, second), RelationalOperator.OP_LE);
+        return new Constraint(subtract(first, second), Relation.LTE);
     }
 
     public static Constraint lessThanOrEqualTo(Expression expression, Term term) {
@@ -265,7 +267,7 @@ public class Symbolics {
     }
 
     public static Constraint greaterThanOrEqualTo(Expression first, Expression second) {
-        return new Constraint(subtract(first, second), RelationalOperator.OP_GE);
+        return new Constraint(subtract(first, second), Relation.GTE);
     }
 
     public static Constraint greaterThanOrEqualTo(Expression expression, Term term) {
