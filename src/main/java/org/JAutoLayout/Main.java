@@ -43,16 +43,16 @@ public class Main {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         // Close the application once the close button is clicked
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setMinimumSize(frame.getSize());
+        frame.setMinimumSize(new Dimension(1500, 100));
 
-        // Close the application once the close button is clicked
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         MainUI mainUI = new MainUI(frame);
         frame.add(mainUI.CenterComponent(), BorderLayout.CENTER);
-        frame.add(new JLabel("we have a very long text just to see how the layout is working. it has no meaning, so don't bother reading the text. it's absolutely meaningless."), BorderLayout.NORTH);
+        //frame.add(new JLabel("we have a very long text just to see how the layout is working. it has no meaning, so don't bother reading the text. it's absolutely meaningless."), BorderLayout.NORTH);
         frame.add(mainUI.WestComponent(), BorderLayout.WEST);
+
         frame.pack();
         frame.show();
+        frame.setVisible(true);
         //
 
         frame.setLayout(new BorderLayout());
@@ -81,21 +81,22 @@ public class Main {
 //        Object result = engine.eval("AutoLayout.VisualFormat.parse(\"|-[find]-[findNext]-[findField(>=20)]-|\")");
 //        System.out.println(result);
 
-        V8 v8 = V8.createV8Runtime();
-        v8.executeScript(Files.readString(Path.of("src/main/java/org/JAutoLayout/autoLayout.js")));
-        String result = v8.executeStringScript("""
-                var constraints = AutoLayout.VisualFormat.parse([
-                    "|-[child1(child3)]-[child3]-|",
-                    "|-[child2(child4)]-[child4]-|",
-                    "[child5(child4)]-|",
-                    "V:|-[child1(child2)]-[child2]-|",
-                    "V:|-[child3(child4,child5)]-[child4]-[child5]-|"
-                ]);
-                var view = new AutoLayout.View({constraints: constraints});
-                view.setSize(400, 400);
-                JSON.stringify(view.subViews)
-                """);
-        System.out.println(result);
+//        V8 v8 = V8.createV8Runtime();
+//        v8.executeScript(Files.readString(Path.of("src/main/java/org/JAutoLayout/autoLayout.js")));
+//        String result = v8.executeStringScript("""
+//                var constraints = AutoLayout.VisualFormat.parse([
+//                    "|-[child1(child3)]-[child3]-|",
+//                    "|-[child2(child4)]-[child4]-|",
+//                    "[child5(child4)]-|",
+//                    "V:|-[child1(child2)]-[child2]-|",
+//                    "V:|-[child3(child4,child5)]-[child4]-[child5]-|"
+//                ]);
+//                var view = new AutoLayout.View({constraints: constraints});
+//                view.setSize(400, 400);
+//                JSON.stringify(view.subViews)
+//                """);
+//
+//        System.out.println(result);
     }
 
     public void ReadJsonData(){

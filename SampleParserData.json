@@ -1,0 +1,37 @@
+{
+  "child1": {
+    "name": "child1",
+    "left": 8,
+    "top": 8,
+    "width": 188,
+    "height": 188
+  },
+  "child3": {
+    "name": "child3",
+    "left": 204,
+    "top": 8,
+    "width": 188,
+    "height": 122.66666666666666
+  },
+  "child2": {
+    "name": "child2",
+    "left": 8,
+    "top": 204,
+    "width": 188,
+    "height": 188
+  },
+  "child4": {
+    "name": "child4",
+    "left": 204,
+    "top": 138.66666666666666,
+    "width": 188,
+    "height": 122.66666666666666
+  },
+  "child5": {
+    "name": "child5",
+    "left": 204,
+    "top": 269.3333333333333,
+    "width": 188,
+    "height": 122.66666666666666
+  }
+}
