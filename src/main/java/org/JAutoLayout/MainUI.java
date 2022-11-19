@@ -25,9 +25,7 @@ public class MainUI {
     public static JPanel CenterComponent()
     {
         centerPanel.setLayout(new AutoLayout());
-
         centerPanel.setBackground(Color.PINK);
-
         return centerPanel;
     }
 
@@ -40,16 +38,18 @@ public class MainUI {
         //JScrollPane scroll =new JScrollPane(westPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         visual_parser_string.setPreferredSize(new Dimension(200, 800));
-        westPanel.add(visual_parser_string);
+        visual_parser_string.setEnabled(true);
         JButton addConstraint = new JButton("Add Constraint");
         addConstraint.addActionListener(e -> onAddConstraintButtonClick());
         westPanel.add(addConstraint);
+        westPanel.add(visual_parser_string);
 
         return westPanel;
     }
     public static void onAddConstraintButtonClick()
     {
-//        String tfString = visual_parser_string.getText();
+        String tfString = visual_parser_string.getText();
+        System.out.println(tfString);
 //        List<String> matchList = new ArrayList<String>();
 //        Pattern regex = Pattern.compile("\\((.*?)\\)");
 //        Matcher regexMatcher = regex.matcher(tfString);

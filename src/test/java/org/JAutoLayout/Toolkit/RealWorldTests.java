@@ -30,95 +30,134 @@ public class RealWorldTests {
     public static final String CENTERX = "centerX";
     public static final String CENTERY = "centerY";
 
+    /**
+     * |-[child1(child3)]-[child3]-|
+     * |-[child2(child4)]-[child4]-|
+     * [child5(child4)]-|
+     * V:|-[child1(child2)]-[child2]-|
+     * V:|-[child3(child4,child5)]-[child4]-[child5]-|
+     */
     private static final String[] CONSTRAINTS = {
 
-            "container.columnWidth == container.width * 0.4",
-            "container.thumbHeight == container.columnWidth / 2",
-            "container.padding == container.width * (0.2 / 3)",
-            "container.leftPadding == container.padding",
-            "container.rightPadding == container.width - container.padding",
-            "container.paddingUnderThumb == 5",
-            "container.rowPadding == 15",
-            "container.buttonPadding == 20",
+            "container.height == 300",
+            "container.width == 300",
+            "container.top == 0",
+            "container.bottom == 300",
+            "container.left == 0",
+            "container.right == 300",
 
-            "thumb0.left == container.leftPadding",
-            "thumb0.top == container.padding",
-            "thumb0.height == container.thumbHeight",
-            "thumb0.width == container.columnWidth",
+            "child1.left == container.left + 8",
+            "child1.width == child3.width",
+            "child3.left == child1.right + 8",
+            "container.right == child3.right + 8",
 
-            "title0.left == container.leftPadding",
-            "title0.top == thumb0.bottom + container.paddingUnderThumb",
-            "title0.height == title0.intrinsicHeight",
-            "title0.width == container.columnWidth",
+            "child2.left == container.left + 8",
+            "child2.width == child4.width",
+            "child4.left == child2.right + 8",
+            "container.right == child4.right + 8",
 
-            "thumb1.right == container.rightPadding",
-            "thumb1.top == container.padding",
-            "thumb1.height == container.thumbHeight",
-            "thumb1.width == container.columnWidth",
+            "child5.width == child4.width",
+            "container.right == child5.right + 8",
 
-            "title1.right == container.rightPadding",
-            "title1.top == thumb0.bottom + container.paddingUnderThumb",
-            "title1.height == title1.intrinsicHeight",
-            "title1.width == container.columnWidth",
+            "child1.top == container.top + 8",
+            "child1.height == child2.height",
+            "child2.top == child1.bottom + 8",
+            "container.bottom == child2.bottom + 8",
 
-            "thumb2.left == container.leftPadding",
-            "thumb2.top >= title0.bottom + container.rowPadding",
-            "thumb2.top == title0.bottom + container.rowPadding !weak",
-            "thumb2.top >= title1.bottom + container.rowPadding",
-            "thumb2.top == title1.bottom + container.rowPadding !weak",
-            "thumb2.height == container.thumbHeight",
-            "thumb2.width == container.columnWidth",
+            "child3.top == container.top + 8",
+            "child3.height == child4.height",
+            "child3.height == child5.height",
+            "child4.top == child3.bottom + 8",
+            "child5.top == child4.bottom + 8",
+            "container.bottom == child5.bottom + 8",
 
-            "title2.left == container.leftPadding",
-            "title2.top == thumb2.bottom + container.paddingUnderThumb",
-            "title2.height == title2.intrinsicHeight",
-            "title2.width == container.columnWidth",
-
-            "thumb3.right == container.rightPadding",
-            "thumb3.top == thumb2.top",
-
-            "thumb3.height == container.thumbHeight",
-            "thumb3.width == container.columnWidth",
-
-            "title3.right == container.rightPadding",
-            "title3.top == thumb3.bottom + container.paddingUnderThumb",
-            "title3.height == title3.intrinsicHeight",
-            "title3.width == container.columnWidth",
-
-            "thumb4.left == container.leftPadding",
-            "thumb4.top >= title2.bottom + container.rowPadding",
-            "thumb4.top >= title3.bottom + container.rowPadding",
-            "thumb4.top == title2.bottom + container.rowPadding !weak",
-            "thumb4.top == title3.bottom + container.rowPadding !weak",
-            "thumb4.height == container.thumbHeight",
-            "thumb4.width == container.columnWidth",
-
-            "title4.left == container.leftPadding",
-            "title4.top == thumb4.bottom + container.paddingUnderThumb",
-            "title4.height == title4.intrinsicHeight",
-            "title4.width == container.columnWidth",
-
-            "thumb5.right == container.rightPadding",
-            "thumb5.top == thumb4.top",
-            "thumb5.height == container.thumbHeight",
-            "thumb5.width == container.columnWidth",
-
-            "title5.right == container.rightPadding",
-            "title5.top == thumb5.bottom + container.paddingUnderThumb",
-            "title5.height == title5.intrinsicHeight",
-            "title5.width == container.columnWidth",
-
-            "line.height == 1",
-            "line.width == container.width",
-            "line.top >= title4.bottom + container.rowPadding",
-            "line.top >= title5.bottom + container.rowPadding",
-
-            "more.top == line.bottom + container.buttonPadding",
-            "more.height == more.intrinsicHeight",
-            "more.left == container.leftPadding",
-            "more.right == container.rightPadding",
-
-            "container.height == more.bottom + container.buttonPadding"
+//            "container.columnWidth == container.width * 0.4",
+//            "container.thumbHeight == container.columnWidth / 2",
+//            "container.padding == container.width * (0.2 / 3)",
+//            "container.leftPadding == container.padding",
+//            "container.rightPadding == container.width - container.padding",
+//            "container.paddingUnderThumb == 5",
+//            "container.rowPadding == 15",
+//            "container.buttonPadding == 20",
+//
+//            "thumb0.left == container.leftPadding",
+//            "thumb0.top == container.padding",
+//            "thumb0.height == container.thumbHeight",
+//            "thumb0.width == container.columnWidth",
+//
+//            "title0.left == container.leftPadding",
+//            "title0.top == thumb0.bottom + container.paddingUnderThumb",
+//            "title0.height == title0.intrinsicHeight",
+//            "title0.width == container.columnWidth",
+//
+//            "thumb1.right == container.rightPadding",
+//            "thumb1.top == container.padding",
+//            "thumb1.height == container.thumbHeight",
+//            "thumb1.width == container.columnWidth",
+//
+//            "title1.right == container.rightPadding",
+//            "title1.top == thumb0.bottom + container.paddingUnderThumb",
+//            "title1.height == title1.intrinsicHeight",
+//            "title1.width == container.columnWidth",
+//
+//            "thumb2.left == container.leftPadding",
+//            "thumb2.top >= title0.bottom + container.rowPadding",
+//            "thumb2.top == title0.bottom + container.rowPadding !weak",
+//            "thumb2.top >= title1.bottom + container.rowPadding",
+//            "thumb2.top == title1.bottom + container.rowPadding !weak",
+//            "thumb2.height == container.thumbHeight",
+//            "thumb2.width == container.columnWidth",
+//
+//            "title2.left == container.leftPadding",
+//            "title2.top == thumb2.bottom + container.paddingUnderThumb",
+//            "title2.height == title2.intrinsicHeight",
+//            "title2.width == container.columnWidth",
+//
+//            "thumb3.right == container.rightPadding",
+//            "thumb3.top == thumb2.top",
+//
+//            "thumb3.height == container.thumbHeight",
+//            "thumb3.width == container.columnWidth",
+//
+//            "title3.right == container.rightPadding",
+//            "title3.top == thumb3.bottom + container.paddingUnderThumb",
+//            "title3.height == title3.intrinsicHeight",
+//            "title3.width == container.columnWidth",
+//
+//            "thumb4.left == container.leftPadding",
+//            "thumb4.top >= title2.bottom + container.rowPadding",
+//            "thumb4.top >= title3.bottom + container.rowPadding",
+//            "thumb4.top == title2.bottom + container.rowPadding !weak",
+//            "thumb4.top == title3.bottom + container.rowPadding !weak",
+//            "thumb4.height == container.thumbHeight",
+//            "thumb4.width == container.columnWidth",
+//
+//            "title4.left == container.leftPadding",
+//            "title4.top == thumb4.bottom + container.paddingUnderThumb",
+//            "title4.height == title4.intrinsicHeight",
+//            "title4.width == container.columnWidth",
+//
+//            "thumb5.right == container.rightPadding",
+//            "thumb5.top == thumb4.top",
+//            "thumb5.height == container.thumbHeight",
+//            "thumb5.width == container.columnWidth",
+//
+//            "title5.right == container.rightPadding",
+//            "title5.top == thumb5.bottom + container.paddingUnderThumb",
+//            "title5.height == title5.intrinsicHeight",
+//            "title5.width == container.columnWidth",
+//
+//            "line.height == 1",
+//            "line.width == container.width",
+//            "line.top >= title4.bottom + container.rowPadding",
+//            "line.top >= title5.bottom + container.rowPadding",
+//
+//            "more.top == line.bottom + container.buttonPadding",
+//            "more.height == more.intrinsicHeight",
+//            "more.left == container.leftPadding",
+//            "more.right == container.rightPadding",
+//
+//            "container.height == more.bottom + container.buttonPadding"
     };
 
 
@@ -144,12 +183,10 @@ public class RealWorldTests {
                         }
                         return variable;
                     }
-                } catch(DuplicateConstraintException e) {
-                    e.printStackTrace();
-                } catch (UnsatisfiableConstraintException e) {
+                } catch(DuplicateConstraintException | UnsatisfiableConstraintException e) {
                     e.printStackTrace();
                 }
-                
+
                 return null;
 
             }
@@ -213,34 +250,36 @@ public class RealWorldTests {
             solver.addConstraint(con);
         }
 
-        solver.addConstraint(ConstraintParser.parseConstraint("container.width == 300", variableResolver));
-        solver.addConstraint(ConstraintParser.parseConstraint("title0.intrinsicHeight == 100", variableResolver));
-        solver.addConstraint(ConstraintParser.parseConstraint("title1.intrinsicHeight == 110", variableResolver));
-        solver.addConstraint(ConstraintParser.parseConstraint("title2.intrinsicHeight == 120", variableResolver));
-        solver.addConstraint(ConstraintParser.parseConstraint("title3.intrinsicHeight == 130", variableResolver));
-        solver.addConstraint(ConstraintParser.parseConstraint("title4.intrinsicHeight == 140", variableResolver));
-        solver.addConstraint(ConstraintParser.parseConstraint("title5.intrinsicHeight == 150", variableResolver));
-        solver.addConstraint(ConstraintParser.parseConstraint("more.intrinsicHeight == 160", variableResolver));
+//        solver.addConstraint(ConstraintParser.parseConstraint("container.width == 300", variableResolver));
+//        solver.addConstraint(ConstraintParser.parseConstraint("title0.intrinsicHeight == 100", variableResolver));
+//        solver.addConstraint(ConstraintParser.parseConstraint("title1.intrinsicHeight == 110", variableResolver));
+//        solver.addConstraint(ConstraintParser.parseConstraint("title2.intrinsicHeight == 120", variableResolver));
+//        solver.addConstraint(ConstraintParser.parseConstraint("title3.intrinsicHeight == 130", variableResolver));
+//        solver.addConstraint(ConstraintParser.parseConstraint("title4.intrinsicHeight == 140", variableResolver));
+//        solver.addConstraint(ConstraintParser.parseConstraint("title5.intrinsicHeight == 150", variableResolver));
+//        solver.addConstraint(ConstraintParser.parseConstraint("more.intrinsicHeight == 160", variableResolver));
 
         solver.updateVariables();
 
-        assertEquals(20, nodeHashMap.get("thumb0").get("top").getValue(), EPSILON);
-        assertEquals(20, nodeHashMap.get("thumb1").get("top").getValue(), EPSILON);
+        printNodes(nodeHashMap);
 
-        assertEquals(85, nodeHashMap.get("title0").get("top").getValue(), EPSILON);
-        assertEquals(85, nodeHashMap.get("title1").get("top").getValue(), EPSILON);
-
-        assertEquals(210, nodeHashMap.get("thumb2").get("top").getValue(), EPSILON);
-        assertEquals(210, nodeHashMap.get("thumb3").get("top").getValue(), EPSILON);
-
-        assertEquals(275, nodeHashMap.get("title2").get("top").getValue(), EPSILON);
-        assertEquals(275, nodeHashMap.get("title3").get("top").getValue(), EPSILON);
-
-        assertEquals(420, nodeHashMap.get("thumb4").get("top").getValue(), EPSILON);
-        assertEquals(420, nodeHashMap.get("thumb5").get("top").getValue(), EPSILON);
-
-        assertEquals(485, nodeHashMap.get("title4").get("top").getValue(), EPSILON);
-        assertEquals(485, nodeHashMap.get("title5").get("top").getValue(), EPSILON);
+//        assertEquals(20, nodeHashMap.get("thumb0").get("top").getValue(), EPSILON);
+//        assertEquals(20, nodeHashMap.get("thumb1").get("top").getValue(), EPSILON);
+//
+//        assertEquals(85, nodeHashMap.get("title0").get("top").getValue(), EPSILON);
+//        assertEquals(85, nodeHashMap.get("title1").get("top").getValue(), EPSILON);
+//
+//        assertEquals(210, nodeHashMap.get("thumb2").get("top").getValue(), EPSILON);
+//        assertEquals(210, nodeHashMap.get("thumb3").get("top").getValue(), EPSILON);
+//
+//        assertEquals(275, nodeHashMap.get("title2").get("top").getValue(), EPSILON);
+//        assertEquals(275, nodeHashMap.get("title3").get("top").getValue(), EPSILON);
+//
+//        assertEquals(420, nodeHashMap.get("thumb4").get("top").getValue(), EPSILON);
+//        assertEquals(420, nodeHashMap.get("thumb5").get("top").getValue(), EPSILON);
+//
+//        assertEquals(485, nodeHashMap.get("title4").get("top").getValue(), EPSILON);
+//        assertEquals(485, nodeHashMap.get("title5").get("top").getValue(), EPSILON);
     }
 
   /*  @Test
@@ -319,15 +358,15 @@ public class RealWorldTests {
     }
 */
   
-    @Test
-    public void testGridX1000() throws DuplicateConstraintException, UnsatisfiableConstraintException, NonlinearExpressionException {
-
-        long nanoTime = System.nanoTime();
-        for (int i = 0; i < 1000; i++) {
-            testGridLayout();
-        }
-        System.out.println("testGridX1000 took " + (System.nanoTime() - nanoTime) / 1000000);
-    }
+//    @Test
+//    public void testGridX1000() throws DuplicateConstraintException, UnsatisfiableConstraintException, NonlinearExpressionException {
+//
+//        long nanoTime = System.nanoTime();
+//        for (int i = 0; i < 1000; i++) {
+//            testGridLayout();
+//        }
+//        System.out.println("testGridX1000 took " + (System.nanoTime() - nanoTime) / 1000000);
+//    }
 
     /*
     @Test
@@ -343,18 +382,14 @@ public class RealWorldTests {
     }*/
 
     private static void printNodes(HashMap<String, HashMap<String, Variable>> variableHashMap) {
-        Iterator<Map.Entry<String, HashMap<String, Variable>>> it = variableHashMap.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, HashMap<String, Variable>> pairs = it.next();
+        for (Map.Entry<String, HashMap<String, Variable>> pairs : variableHashMap.entrySet()) {
             System.out.println("node " + pairs.getKey());
             printVariables(pairs.getValue());
         }
     }
 
     private static void printVariables(HashMap<String, Variable> variableHashMap) {
-        Iterator<Map.Entry<String, Variable>> it = variableHashMap.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, Variable> pairs = it.next();
+        for (Map.Entry<String, Variable> pairs : variableHashMap.entrySet()) {
             System.out.println(" " + pairs.getKey() + " = " + pairs.getValue().getValue() + " (address:" + pairs.getValue().hashCode() + ")");
         }
     }

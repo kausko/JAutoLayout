@@ -8,6 +8,16 @@ import java.util.function.Supplier;
 
 public class Solver {
 
+    private static double EPSILON = 1.0e-2;
+    public static final String LEFT = "left";
+    public static final String RIGHT = "right";
+    public static final String TOP = "top";
+    public static final String BOTTOM = "bottom";
+    public static final String HEIGHT = "height";
+    public static final String WIDTH = "width";
+    public static final String CENTERX = "centerX";
+    public static final String CENTERY = "centerY";
+
     private static class Tag {
         Symbol marker;
         Symbol other;
@@ -509,4 +519,94 @@ public class Solver {
                 .allMatch(s -> s.getType() == Symbol.Type.DUMMY);
     }
 
+    public HashMap<String, HashMap<String, Variable>> solve(List<String> constraints, Integer height, Integer width) throws Exception {
+        HashMap<String, HashMap<String, Variable>> result = new HashMap<>();
+        var variableSolver = new ConstraintParser.CassowaryVariableResolver() {
+            private Variable getVariableFromNode(HashMap<String, Variable> node, String variableName) {
+
+                try {
+                    if (node.containsKey(variableName)) {
+                        return node.get(variableName);
+                    } else {
+                        Variable variable = new Variable(variableName);
+                        node.put(variableName, variable);
+                        if (RIGHT.equals(variableName)) {
+                            addConstraint(Symbolics.equals(variable, Symbolics.add(getVariableFromNode(node, LEFT), getVariableFromNode(node, WIDTH))));
+                        } else if (BOTTOM.equals(variableName)) {
+                            addConstraint(Symbolics.equals(variable, Symbolics.add(getVariableFromNode(node, TOP), getVariableFromNode(node, HEIGHT))));
+                        } else if (CENTERX.equals(variableName)) {
+                            // solver.addConstraint(Symbolics.equals(variable, Symbolics.add(Symbolics.divide(getVariableFromNode(node, WIDTH), 2), getVariableFromNode(node, LEFT)));
+                        } else if (CENTERY.equals(variableName)) {
+                            // solver.addConstraint(Symbolics.equals(variable, Symbolics.add(new Expression(Symbolics.divide(getVariableFromNode(node, HEIGHT), 2)), getVariableFromNode(node, TOP));
+                        }
+                        return variable;
+                    }
+                } catch(DuplicateConstraintException | UnsatisfiableConstraintException e) {
+                    e.printStackTrace();
+                }
+
+                return null;
+
+            }
+
+            private HashMap<String, Variable> getNode(String nodeName) {
+                HashMap<String, Variable> node;
+                if (result.containsKey(nodeName)) {
+                    node = result.get(nodeName);
+                } else {
+                    node = new HashMap<String, Variable>();
+                    result.put(nodeName, node);
+                }
+                return node;
+            }
+
+            @Override
+            public Variable resolveVariable(String variableName) {
+
+                String[] stringArray = variableName.split("\\.");
+                if (stringArray.length == 2) {
+                    String nodeName = stringArray[0];
+                    String propertyName = stringArray[1];
+
+                    HashMap<String, Variable> node = getNode(nodeName);
+
+                    return getVariableFromNode(node, propertyName);
+
+                } else {
+                    throw new RuntimeException("can't resolve variable");
+                }
+            }
+
+            @Override
+            public Expression resolveConstant(String name) {
+                try {
+                    return new Expression(Double.parseDouble(name));
+                } catch (NumberFormatException e) {
+                    return null;
+                }
+            }
+        };
+
+        var defaultConstraints = Arrays.asList(
+                "container.height == " + height,
+                "container.width == " + width,
+                "container.top == 0",
+                "container.bottom == " + height,
+                "container.left == 0",
+                "container.right == " + width
+        );
+
+        for (String constraint : defaultConstraints) {
+            var con = ConstraintParser.parseConstraint(constraint, variableSolver);
+            addConstraint(con);
+        }
+
+        for (String constraint : constraints) {
+            var con = ConstraintParser.parseConstraint(constraint, variableSolver);
+            addConstraint(con);
+        }
+
+        updateVariables();
+        return result;
+    }
 }
