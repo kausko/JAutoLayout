@@ -119,8 +119,8 @@ public class AutoLayout implements LayoutManager {
 
             for (var entry: jsonData.entrySet()
             ) {
-                int x = (int)Double.parseDouble(entry.getValue().get("top")) + (parent.getX());
-                int y = (int)Double.parseDouble(entry.getValue().get("left")) + (parent.getY());
+                int y = (int)Double.parseDouble(entry.getValue().get("top")) + (parent.getX());
+                int x = (int)Double.parseDouble(entry.getValue().get("left")) + (parent.getY());
                 int width = (int)Double.parseDouble(entry.getValue().get("width")) ;
                 int height = (int)Double.parseDouble(entry.getValue().get("height")) ;
                 System.out.println("object printed");

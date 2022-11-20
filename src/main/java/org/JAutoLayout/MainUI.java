@@ -67,12 +67,7 @@ public class MainUI {
 //           centerPanel.add(panel);
 //        }
 
-        JPanel panel = new JPanel();
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panel.setBackground(Color.blue);
-        panel.setBounds(200, 200, 30, 30);
         mainFrame.getPreferredSize();
-        centerPanel.add(panel);
         mainFrame.revalidate();
         mainFrame.repaint();
     }
