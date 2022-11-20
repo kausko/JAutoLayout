@@ -1,4 +1,4 @@
-package org.JAutoLayout.Parser.rekex;
+package org.JAutoLayout.VFLUtils;
 
 import org.rekex.helper.anno.Ch;
 import org.rekex.helper.anno.Str;
@@ -17,13 +17,13 @@ public class Grammar {
             Opt<ConnectionSuperView> connectionSuperView
     ) {}
 
-    public record ConnectionView(Connection c, View v) {}
+    public record ConnectionView(Connection connection, View view) {}
 
-    public record ConnectionSuperView(Connection c, SuperView s) {}
+    public record ConnectionSuperView(Connection connection, SuperView superView) {}
 
-    public record SuperViewConnection(SuperView s, Connection c) {}
+    public record SuperViewConnection(SuperView superView, Connection connection) {}
 
-    public record Orientation(@Str({"H", "V"}) String orientation) {}
+    public record Orientation(@Str({"H", "V"}) String orientation, @Ch(":") String colon) {}
 
     public record SuperView(@Ch("|") String superView) {}
 
@@ -42,13 +42,11 @@ public class Grammar {
         Connector connector2
     ) implements Connection {}
 
-    public record Connector(@Ch("-") char c) implements Connection {}
+    public record Connector(@Ch("-") char connector) implements Connection {}
 
-    public record EmptyString(@Str("") String s) implements Connection {}
+    public record EmptyString(@Str("") String emptyString) implements Connection {}
 
-    public sealed interface PredicateList permits SimplePredicate, PredicateListWithParens {}
-
-    public record SimplePredicate(Number n) implements PredicateList {}
+    public sealed interface PredicateList permits Number, PredicateListWithParens {}
 
     public record PredicateListWithParens (
         @Ch("(") char openParen,
@@ -63,26 +61,20 @@ public class Grammar {
     ) {}
 
     public record Predicate(
-            Opt<Relation> rel,
+            Opt<Relation> relation,
             ObjectOfPredicate oop,
             Opt<StrPriority> atp
     ) {}
 
     public record Relation(@Str({"==", "<=", ">="}) String rel) {}
 
-    public sealed interface ObjectOfPredicate permits Constant, ViewName {}
+    public sealed interface ObjectOfPredicate permits Number, ViewName {}
 
     public record StrPriority(@Ch("@") char at, Priority priority) {}
 
     public record Priority(@Regex("[0-9]+") String digits) {}
 
-    public record Constant(Number n) implements ObjectOfPredicate {}
-
     public record ViewName(@Regex("[a-zA-Z_][a-zA-Z0-9_]*") String name) implements ObjectOfPredicate {}
 
-    public sealed interface Number permits Integer, Double {}
-
-    public record Integer(@Regex("[0-9]+") String integer) implements Number {}
-
-    public record Double(@Regex("[0-9]+\\.[0-9]+") String dbl) implements Number {}
+    public record Number(@Regex("([0-9]+(?:\\.[0-9]*)?)") String number) implements ObjectOfPredicate, PredicateList {}
 }
