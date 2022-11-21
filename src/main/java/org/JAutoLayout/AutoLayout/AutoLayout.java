@@ -125,7 +125,7 @@ public class AutoLayout implements LayoutManager {
                 Solver solver = new Solver();
 
                 // TODO: add the parent's width and height to the solver
-                var map = solver.solve(res, 300, 300);
+                var map = solver.solve(res, parent.getHeight(), parent.getWidth());
 
                 // TODO: REMOVE: JSONified output of the map
 //                System.out.println("{");
