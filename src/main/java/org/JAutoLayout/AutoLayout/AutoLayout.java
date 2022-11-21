@@ -1,7 +1,11 @@
 package org.JAutoLayout.AutoLayout;
 
+import org.JAutoLayout.Toolkit.Solver;
+import org.JAutoLayout.Toolkit.Variable;
+import org.JAutoLayout.VFLUtils.Parser;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
+import org.rekex.helper.anno.Str;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,9 +13,8 @@ import java.io.File;
 import java.io.FileReader;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
+import java.util.List;
 
 
 public class AutoLayout implements LayoutManager {
@@ -20,12 +23,14 @@ public class AutoLayout implements LayoutManager {
     private int preferredWidth = 0, preferredHeight = 0;
     private boolean sizeUnknown = true;
 
+    private List<String> userConstraints = null;
+
     public AutoLayout() {
-        this(5);
+        this(null);
     }
 
-    public AutoLayout(int v) {
-        vgap = v;
+    public AutoLayout(List<String> constraint) {
+        userConstraints = constraint;
     }
 
     /* Required by LayoutManager. */
@@ -112,37 +117,57 @@ public class AutoLayout implements LayoutManager {
      * of applets, at least, they probably won't be.
      */
     public void layoutContainer(Container parent) {
-        try {
-            Map<String, Map<String, String>> jsonData = ReadJsonData();
-            System.out.println("size of the constraint" + jsonData.entrySet().size());
-            System.out.println(parent);
 
-            for (var entry: jsonData.entrySet()
-            ) {
-                int y = (int)Double.parseDouble(entry.getValue().get("top")) + (parent.getX());
-                int x = (int)Double.parseDouble(entry.getValue().get("left")) + (parent.getY());
-                int width = (int)Double.parseDouble(entry.getValue().get("width")) ;
-                int height = (int)Double.parseDouble(entry.getValue().get("height")) ;
-                System.out.println("object printed");
-                JPanel panel = new JPanel();
-                panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-                panel.setBackground(Color.blue);
-                panel.setBounds(x,y,width ,height );
-                parent.add(panel);
-            };
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        //Iterate over employee array
+            try {
+                var parser = new Parser();
+                var res = parser.parse(userConstraints);
+                int x = 0, y = 0, width = 0, height =0;
+                Solver solver = new Solver();
+                var map = solver.solve(res, 300, 300);
 
-//        for(int i = 1; i<= 3; i++)
-//        {
-//            JPanel panel = new JPanel();
-//            panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-//            panel.setBackground(Color.blue);
-//            panel.setBounds(200 *i, 200*i, 30*i, 30*i);
-//            parent.add(panel);
-//        }
+                for (var entry: map.entrySet()) {
+
+                    if(!entry.getKey().equals("container"))
+                    {
+
+                        HashMap<String, Variable> values = entry.getValue();
+                        for(var constraint : values.entrySet()){
+                            if(constraint.getKey().equals("top"))
+                            {
+                                y = (int)constraint.getValue().getValue();
+                            }
+                            if(constraint.getKey().equals("left"))
+                            {
+                                x = (int) constraint.getValue().getValue();
+                            }
+                            if(constraint.getKey().equals("width"))
+                            {
+                                width = (int) constraint.getValue().getValue();
+                            }
+                            if(constraint.getKey().equals("height"))
+                            {
+                                height = (int) constraint.getValue().getValue();
+                            }
+
+                            System.out.println("coordinate values "+ x + " " + y+ " " + width + " " + height);
+
+                            JPanel panel = new JPanel();
+                            panel.setBorder(BorderFactory.createEmptyBorder(200, 200, 200, 200));
+                            panel.setBackground(Color.blue);
+                            panel.setBounds( x, y, width , height);
+                            parent.add(panel);
+                        }
+
+
+                    }
+                };
+
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
 
     }
     public Map ReadJsonData() throws IOException {
