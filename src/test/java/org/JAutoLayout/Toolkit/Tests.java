@@ -1,8 +1,5 @@
 package org.JAutoLayout.Toolkit;
 
-import org.JAutoLayout.Toolkit.Exceptions.DuplicateConstraintException;
-import org.JAutoLayout.Toolkit.Exceptions.UnknownConstraintException;
-import org.JAutoLayout.Toolkit.Exceptions.UnsatisfiableConstraintException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -13,12 +10,12 @@ public class Tests {
     private static double EPSILON = 1.0e-8;
 
     @Test()
-    public void simpleNew() throws UnsatisfiableConstraintException, DuplicateConstraintException {
+    public void simpleNew() throws Exception {
         Solver solver = new Solver();
         Variable x = new Variable("x");
 
 
-        solver.addConstraint(Symbolics.equals(Symbolics.add(x, 2), 20));
+        solver.addConstraint(Operations.equals(Operations.add(x, 2), 20));
 
         solver.updateVariables();
 
@@ -26,14 +23,14 @@ public class Tests {
     }
 
     @Test
-    public void simple0() throws UnsatisfiableConstraintException, DuplicateConstraintException {
+    public void simple0() throws Exception {
         Solver solver = new Solver();
         Variable x = new Variable("x");
         Variable y = new Variable("y");
 
-        solver.addConstraint(Symbolics.equals(x, 20));
+        solver.addConstraint(Operations.equals(x, 20));
 
-        solver.addConstraint(Symbolics.equals(Symbolics.add(x, 2), Symbolics.add(y, 10)));
+        solver.addConstraint(Operations.equals(Operations.add(x, 2), Operations.add(y, 10)));
 
         solver.updateVariables();
 
@@ -44,25 +41,25 @@ public class Tests {
     }
 
     @Test
-    public void simple1() throws DuplicateConstraintException, UnsatisfiableConstraintException {
+    public void simple1() throws Exception {
         Variable x = new Variable("x");
         Variable y = new Variable("y");
         Solver solver = new Solver();
-        solver.addConstraint(Symbolics.equals(x, y));
+        solver.addConstraint(Operations.equals(x, y));
         solver.updateVariables();
         assertEquals(x.getValue(), y.getValue(), EPSILON);
     }
 
     @Test
-    public void casso1() throws DuplicateConstraintException, UnsatisfiableConstraintException {
+    public void casso1() throws Exception {
         Variable x = new Variable("x");
         Variable y = new Variable("y");
         Solver solver = new Solver();
 
-        solver.addConstraint(Symbolics.lessThanOrEqualTo(x, y));
-        solver.addConstraint(Symbolics.equals(y, Symbolics.add(x, 3.0)));
-        solver.addConstraint(Symbolics.equals(x, 10.0).setStrength(Strength.WEAK));
-        solver.addConstraint(Symbolics.equals(y, 10.0).setStrength(Strength.WEAK));
+        solver.addConstraint(Operations.lessThanOrEqualTo(x, y));
+        solver.addConstraint(Operations.equals(y, Operations.add(x, 3.0)));
+        solver.addConstraint(Operations.equals(x, 10.0).setStrength(Strength.WEAK));
+        solver.addConstraint(Operations.equals(y, 10.0).setStrength(Strength.WEAK));
 
         solver.updateVariables();
 
@@ -76,17 +73,17 @@ public class Tests {
     }
 
     @Test
-    public void addDelete1() throws DuplicateConstraintException, UnsatisfiableConstraintException, UnknownConstraintException {
+    public void addDelete1() throws Exception {
         Variable x = new Variable("x");
         Solver solver = new Solver();
 
-        solver.addConstraint(Symbolics.lessThanOrEqualTo(x, 100).setStrength(Strength.WEAK));
+        solver.addConstraint(Operations.lessThanOrEqualTo(x, 100).setStrength(Strength.WEAK));
 
         solver.updateVariables();
         assertEquals(100, x.getValue(), EPSILON);
 
-        Constraint c10 = Symbolics.lessThanOrEqualTo(x, 10.0);
-        Constraint c20 = Symbolics.lessThanOrEqualTo(x, 20.0);
+        Constraint c10 = Operations.lessThanOrEqualTo(x, 10.0);
+        Constraint c20 = Operations.lessThanOrEqualTo(x, 20.0);
 
         solver.addConstraint(c10);
         solver.addConstraint(c20);
@@ -106,7 +103,7 @@ public class Tests {
 
         assertEquals(100, x.getValue(), EPSILON);
 
-        Constraint c10again = Symbolics.lessThanOrEqualTo(x, 10.0);
+        Constraint c10again = Operations.lessThanOrEqualTo(x, 10.0);
 
         solver.addConstraint(c10again);
         solver.addConstraint(c10);
@@ -124,16 +121,16 @@ public class Tests {
     }
 
     @Test
-    public void addDelete2() throws DuplicateConstraintException, UnsatisfiableConstraintException, UnknownConstraintException {
+    public void addDelete2() throws Exception {
         Variable x = new Variable("x");
         Variable y = new Variable("y");
         Solver solver = new Solver();
 
-        solver.addConstraint(Symbolics.equals(x, 100).setStrength(Strength.WEAK));
-        solver.addConstraint(Symbolics.equals(y, 120).setStrength(Strength.STRONG));
+        solver.addConstraint(Operations.equals(x, 100).setStrength(Strength.WEAK));
+        solver.addConstraint(Operations.equals(y, 120).setStrength(Strength.STRONG));
 
-        Constraint c10 = Symbolics.lessThanOrEqualTo(x, 10.0);
-        Constraint c20 = Symbolics.lessThanOrEqualTo(x, 20.0);
+        Constraint c10 = Operations.lessThanOrEqualTo(x, 10.0);
+        Constraint c20 = Operations.lessThanOrEqualTo(x, 20.0);
 
         solver.addConstraint(c10);
         solver.addConstraint(c20);
@@ -148,7 +145,7 @@ public class Tests {
         assertEquals(20, x.getValue(), EPSILON);
         assertEquals(120, y.getValue(), EPSILON);
 
-        Constraint cxy = Symbolics.equals(Symbolics.multiply(x, 2.0), y);
+        Constraint cxy = Operations.equals(Operations.multiply(x, 2.0), y);
         solver.addConstraint(cxy);
         solver.updateVariables();
 
@@ -168,29 +165,29 @@ public class Tests {
         assertEquals(120, y.getValue(), EPSILON);
     }
 
-    @Test(expected = UnsatisfiableConstraintException.class)
-    public void inconsistent1() throws InternalError, DuplicateConstraintException, UnsatisfiableConstraintException {
+    @Test(expected = ConstraintException.class)
+    public void inconsistent1() throws InternalError, Exception {
         Variable x = new Variable("x");
         Solver solver = new Solver();
 
-        solver.addConstraint(Symbolics.equals(x, 10.0));
-        solver.addConstraint(Symbolics.equals(x, 5.0));
+        solver.addConstraint(Operations.equals(x, 10.0));
+        solver.addConstraint(Operations.equals(x, 5.0));
 
         solver.updateVariables();
     }
 
-    @Test(expected = UnsatisfiableConstraintException.class)
-    public void inconsistent2() throws DuplicateConstraintException, UnsatisfiableConstraintException {
+    @Test(expected = ConstraintException.class)
+    public void inconsistent2() throws Exception {
         Variable x = new Variable("x");
         Solver solver = new Solver();
 
-        solver.addConstraint(Symbolics.greaterThanOrEqualTo(x, 10.0));
-        solver.addConstraint(Symbolics.lessThanOrEqualTo(x, 5.0));
+        solver.addConstraint(Operations.greaterThanOrEqualTo(x, 10.0));
+        solver.addConstraint(Operations.lessThanOrEqualTo(x, 5.0));
         solver.updateVariables();
     }
 
-    @Test(expected = UnsatisfiableConstraintException.class)
-    public void inconsistent3() throws DuplicateConstraintException, UnsatisfiableConstraintException {
+    @Test(expected = ConstraintException.class)
+    public void inconsistent3() throws Exception {
 
         Variable w = new Variable("w");
         Variable x = new Variable("x");
@@ -198,12 +195,12 @@ public class Tests {
         Variable z = new Variable("z");
         Solver solver = new Solver();
 
-        solver.addConstraint(Symbolics.greaterThanOrEqualTo(w, 10.0));
-        solver.addConstraint(Symbolics.greaterThanOrEqualTo(x, w));
-        solver.addConstraint(Symbolics.greaterThanOrEqualTo(y, x));
-        solver.addConstraint(Symbolics.greaterThanOrEqualTo(z, y));
-        solver.addConstraint(Symbolics.greaterThanOrEqualTo(z, 8.0));
-        solver.addConstraint(Symbolics.lessThanOrEqualTo(z, 4.0));
+        solver.addConstraint(Operations.greaterThanOrEqualTo(w, 10.0));
+        solver.addConstraint(Operations.greaterThanOrEqualTo(x, w));
+        solver.addConstraint(Operations.greaterThanOrEqualTo(y, x));
+        solver.addConstraint(Operations.greaterThanOrEqualTo(z, y));
+        solver.addConstraint(Operations.greaterThanOrEqualTo(z, 8.0));
+        solver.addConstraint(Operations.lessThanOrEqualTo(z, 4.0));
         solver.updateVariables();
     }
 

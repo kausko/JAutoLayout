@@ -1,14 +1,10 @@
 package org.JAutoLayout.Toolkit;
 
-import org.JAutoLayout.Toolkit.Exceptions.*;
-
 import java.util.*;
 import java.util.function.Supplier;
 
 
 public class Solver {
-
-    private static double EPSILON = 1.0e-2;
     public static final String LEFT = "left";
     public static final String RIGHT = "right";
     public static final String TOP = "top";
@@ -40,19 +36,19 @@ public class Solver {
         }
     }
 
-    private Map<Constraint, Tag> cns = new LinkedHashMap<Constraint, Tag>();
-    private Map<Symbol, Row> rows = new LinkedHashMap<Symbol, Row>();
-    private Map<Variable, Symbol> vars = new LinkedHashMap<Variable, Symbol>();
-    private Map<Variable, EditInfo> edits = new LinkedHashMap<Variable, EditInfo>();
-    private List<Symbol> infeasibleRows = new ArrayList<Symbol>();
-    private Row objective = new Row();
+    private final Map<Constraint, Tag> cns = new LinkedHashMap<>();
+    private final Map<Symbol, Row> rows = new LinkedHashMap<>();
+    private final Map<Variable, Symbol> vars = new LinkedHashMap<>();
+    private final Map<Variable, EditInfo> edits = new LinkedHashMap<>();
+    private final List<Symbol> infeasibleRows = new ArrayList<>();
+    private final Row objective = new Row();
     private Row artificial;
 
 
-    public void addConstraint(Constraint constraint) throws DuplicateConstraintException, UnsatisfiableConstraintException {
+    public void addConstraint(Constraint constraint) throws ConstraintException, ConstraintException {
 
         if (cns.containsKey(constraint)) {
-            throw new DuplicateConstraintException(constraint);
+            throw new ConstraintException(constraint);
         }
 
         Tag tag = new Tag();
@@ -61,7 +57,7 @@ public class Solver {
 
         if (subject.getType() == Symbol.Type.INVALID && allDummies(row)) {
             if (!Utils.nearZero(row.getConstant())) {
-                throw new UnsatisfiableConstraintException(constraint);
+                throw new ConstraintException(constraint);
             } else {
                 subject = tag.marker;
             }
@@ -69,7 +65,7 @@ public class Solver {
 
         if (subject.getType() == Symbol.Type.INVALID) {
             if (!addWithArtificialVariable(row)) {
-                throw new UnsatisfiableConstraintException(constraint);
+                throw new ConstraintException(constraint);
             }
         } else {
             row.solve(subject);
@@ -82,10 +78,10 @@ public class Solver {
         optimize(objective);
     }
 
-    public void removeConstraint(Constraint constraint) throws UnknownConstraintException, InternalSolverError {
+    public void removeConstraint(Constraint constraint) throws ConstraintException, Error {
         Tag tag = cns.get(constraint);
         if (tag == null) {
-            throw new UnknownConstraintException(constraint);
+            throw new ConstraintException(constraint);
         }
 
         cns.remove(constraint);
@@ -97,7 +93,7 @@ public class Solver {
         } else {
             row = getMarkerLeavingRow(tag.marker);
             if (row == null) {
-                throw new InternalSolverError("internal solver error");
+                throw new Error("internal solver error");
             }
 
             Symbol leaving = null;
@@ -107,7 +103,7 @@ public class Solver {
                 }
             }
             if (leaving == null) {
-                throw new InternalSolverError("internal solver error");
+                throw new Error("internal solver error");
             }
 
             rows.remove(leaving);
@@ -179,15 +175,15 @@ public class Solver {
         return cns.containsKey(constraint);
     }
 
-    public void addEditVariable(Variable variable, double strength) throws DuplicateEditVariableException, RequiredFailureException {
+    public void addEditVariable(Variable variable, double strength) throws Exception {
         if (edits.containsKey(variable)) {
-            throw new DuplicateEditVariableException();
+            throw new Exception("Duplicate edit variable");
         }
 
         strength = Strength.clip(strength);
 
         if (strength == Strength.REQUIRED) {
-            throw new RequiredFailureException();
+            throw new Exception("An edit variable cannot be required");
         }
 
         List<Term> terms = new ArrayList<>();
@@ -196,7 +192,7 @@ public class Solver {
 
         try {
             addConstraint(constraint);
-        } catch (DuplicateConstraintException | UnsatisfiableConstraintException e) {
+        } catch (ConstraintException e) {
             e.printStackTrace();
         }
 
@@ -205,15 +201,15 @@ public class Solver {
         edits.put(variable, info);
     }
 
-    public void removeEditVariable(Variable variable) throws UnknownEditVariableException {
+    public void removeEditVariable(Variable variable) throws Exception {
         EditInfo edit = edits.get(variable);
         if (edit == null) {
-            throw new UnknownEditVariableException();
+            throw new Exception("Unknown edit variable");
         }
 
         try {
             removeConstraint(edit.constraint);
-        } catch (UnknownConstraintException e) {
+        } catch (ConstraintException e) {
             e.printStackTrace();
         }
 
@@ -224,10 +220,10 @@ public class Solver {
         return edits.containsKey(variable);
     }
 
-    public void suggestValue(Variable variable, double value) throws UnknownEditVariableException {
+    public void suggestValue(Variable variable, double value) throws Exception {
         EditInfo info = edits.get(variable);
         if (info == null) {
-            throw new UnknownEditVariableException();
+            throw new Exception("Unknown edit variable");
         }
 
         double delta = value - info.constant;
@@ -284,8 +280,8 @@ public class Solver {
         });
 
         switch (constraint.getOp()) {
-            case LTE, GTE -> {
-                double coeff = constraint.getOp() == Relation.LTE ? 1.0 : -1.0;
+            case LEQ, GEQ -> {
+                double coeff = constraint.getOp() == Relation.LEQ ? 1.0 : -1.0;
                 Symbol slack = new Symbol(Symbol.Type.SLACK);
                 tag.marker = slack;
                 row.insert(slack, coeff);
@@ -410,7 +406,7 @@ public class Solver {
 
             Row entry = getLeavingRow(entering);
             if (entry == null) {
-                throw new InternalSolverError("The objective is unbounded.");
+                throw new Error("The objective is unbounded.");
             }
             Symbol leaving = rows
                     .entrySet()
@@ -427,14 +423,14 @@ public class Solver {
         }
     }
 
-    void dualOptimize() throws InternalSolverError {
+    void dualOptimize() throws Error {
         while (!infeasibleRows.isEmpty()) {
             Symbol leaving = infeasibleRows.remove(infeasibleRows.size() - 1);
             Row row = rows.get(leaving);
             if (row != null && row.getConstant() < 0.0) {
                 Symbol entering = getDualEnteringSymbol(row);
                 if (entering.getType() == Symbol.Type.INVALID) {
-                    throw new InternalSolverError("internal solver error");
+                    throw new Error("internal solver error");
                 }
                 rows.remove(leaving);
                 row.solve(leaving, entering);
@@ -521,27 +517,23 @@ public class Solver {
 
     public HashMap<String, HashMap<String, Variable>> solve(List<String> constraints, Integer height, Integer width) throws Exception {
         HashMap<String, HashMap<String, Variable>> result = new HashMap<>();
-        var variableSolver = new ConstraintParser.CassowaryVariableResolver() {
-            private Variable getVariableFromNode(HashMap<String, Variable> node, String variableName) {
+        var variableSolver = new VariableResolver() {
+            private Variable getVariableFromNode(HashMap<String, Variable> node, String propertyName) {
 
                 try {
-                    if (node.containsKey(variableName)) {
-                        return node.get(variableName);
+                    if (node.containsKey(propertyName)) {
+                        return node.get(propertyName);
                     } else {
-                        Variable variable = new Variable(variableName);
-                        node.put(variableName, variable);
-                        if (RIGHT.equals(variableName)) {
-                            addConstraint(Symbolics.equals(variable, Symbolics.add(getVariableFromNode(node, LEFT), getVariableFromNode(node, WIDTH))));
-                        } else if (BOTTOM.equals(variableName)) {
-                            addConstraint(Symbolics.equals(variable, Symbolics.add(getVariableFromNode(node, TOP), getVariableFromNode(node, HEIGHT))));
-                        } else if (CENTERX.equals(variableName)) {
-                            // solver.addConstraint(Symbolics.equals(variable, Symbolics.add(Symbolics.divide(getVariableFromNode(node, WIDTH), 2), getVariableFromNode(node, LEFT)));
-                        } else if (CENTERY.equals(variableName)) {
-                            // solver.addConstraint(Symbolics.equals(variable, Symbolics.add(new Expression(Symbolics.divide(getVariableFromNode(node, HEIGHT), 2)), getVariableFromNode(node, TOP));
+                        Variable variable = new Variable(propertyName);
+                        node.put(propertyName, variable);
+                        if (RIGHT.equals(propertyName)) {
+                            addConstraint(Operations.equals(variable, Operations.add(getVariableFromNode(node, LEFT), getVariableFromNode(node, WIDTH))));
+                        } else if (BOTTOM.equals(propertyName)) {
+                            addConstraint(Operations.equals(variable, Operations.add(getVariableFromNode(node, TOP), getVariableFromNode(node, HEIGHT))));
                         }
                         return variable;
                     }
-                } catch(DuplicateConstraintException | UnsatisfiableConstraintException e) {
+                } catch(Exception e) {
                     e.printStackTrace();
                 }
 
@@ -554,7 +546,7 @@ public class Solver {
                 if (result.containsKey(nodeName)) {
                     node = result.get(nodeName);
                 } else {
-                    node = new HashMap<String, Variable>();
+                    node = new HashMap<>();
                     result.put(nodeName, node);
                 }
                 return node;

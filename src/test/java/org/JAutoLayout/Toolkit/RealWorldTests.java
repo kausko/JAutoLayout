@@ -1,15 +1,11 @@
 package org.JAutoLayout.Toolkit;
 
-import org.JAutoLayout.Toolkit.Exceptions.DuplicateConstraintException;
-import org.JAutoLayout.Toolkit.Exceptions.NonlinearExpressionException;
-import org.JAutoLayout.Toolkit.Exceptions.UnsatisfiableConstraintException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -161,8 +157,8 @@ public class RealWorldTests {
     };
 
 
-    public ConstraintParser.CassowaryVariableResolver createVariableResolver(final Solver solver, final HashMap<String, HashMap<String, Variable>> nodeHashMap) {
-        ConstraintParser.CassowaryVariableResolver variableResolver = new ConstraintParser.CassowaryVariableResolver() {
+    public VariableResolver createVariableResolver(final Solver solver, final HashMap<String, HashMap<String, Variable>> nodeHashMap) {
+        VariableResolver variableResolver = new VariableResolver() {
 
             private Variable getVariableFromNode(HashMap<String, Variable> node, String variableName) {
 
@@ -173,9 +169,9 @@ public class RealWorldTests {
                         Variable variable = new Variable(variableName);
                         node.put(variableName, variable);
                         if (RIGHT.equals(variableName)) {
-                            solver.addConstraint(Symbolics.equals(variable, Symbolics.add(getVariableFromNode(node, LEFT), getVariableFromNode(node, WIDTH))));
+                            solver.addConstraint(Operations.equals(variable, Operations.add(getVariableFromNode(node, LEFT), getVariableFromNode(node, WIDTH))));
                         } else if (BOTTOM.equals(variableName)) {
-                            solver.addConstraint(Symbolics.equals(variable, Symbolics.add(getVariableFromNode(node, TOP), getVariableFromNode(node, HEIGHT))));
+                            solver.addConstraint(Operations.equals(variable, Operations.add(getVariableFromNode(node, TOP), getVariableFromNode(node, HEIGHT))));
                         } else if (CENTERX.equals(variableName)) {
                            // solver.addConstraint(Symbolics.equals(variable, Symbolics.add(Symbolics.divide(getVariableFromNode(node, WIDTH), 2), getVariableFromNode(node, LEFT)));
                         } else if (CENTERY.equals(variableName)) {
@@ -183,7 +179,7 @@ public class RealWorldTests {
                         }
                         return variable;
                     }
-                } catch(DuplicateConstraintException | UnsatisfiableConstraintException e) {
+                } catch(ConstraintException e) {
                     e.printStackTrace();
                 }
 
@@ -238,12 +234,12 @@ public class RealWorldTests {
     }
 
     @Test
-    public void testGridLayout() throws DuplicateConstraintException, UnsatisfiableConstraintException, NonlinearExpressionException {
+    public void testGridLayout() throws ConstraintException, ConstraintException, Exception {
 
         final Solver solver = new Solver();
         final HashMap<String, HashMap<String, Variable>> nodeHashMap = new HashMap<>();
 
-        ConstraintParser.CassowaryVariableResolver variableResolver = createVariableResolver(solver, nodeHashMap);
+        VariableResolver variableResolver = createVariableResolver(solver, nodeHashMap);
 
         for (String constraint : CONSTRAINTS) {
             Constraint con = ConstraintParser.parseConstraint(constraint, variableResolver);
@@ -359,7 +355,7 @@ public class RealWorldTests {
 */
   
 //    @Test
-//    public void testGridX1000() throws DuplicateConstraintException, UnsatisfiableConstraintException, NonlinearExpressionException {
+//    public void testGridX1000() throws ConstraintException, ConstraintException, NonlinearExpressionException {
 //
 //        long nanoTime = System.nanoTime();
 //        for (int i = 0; i < 1000; i++) {

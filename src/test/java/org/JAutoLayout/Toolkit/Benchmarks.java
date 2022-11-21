@@ -1,9 +1,5 @@
 package org.JAutoLayout.Toolkit;
 
-import org.JAutoLayout.Toolkit.Exceptions.DuplicateConstraintException;
-import org.JAutoLayout.Toolkit.Exceptions.NonlinearExpressionException;
-import org.JAutoLayout.Toolkit.Exceptions.UnsatisfiableConstraintException;
-
 import java.util.HashMap;
 
 /**
@@ -11,12 +7,12 @@ import java.util.HashMap;
  */
 public class Benchmarks {
 
-    public static void testAddingLotsOfConstraints() throws DuplicateConstraintException, UnsatisfiableConstraintException, NonlinearExpressionException {
+    public static void testAddingLotsOfConstraints() throws Exception {
         Solver solver = new Solver();
 
         final HashMap<String, Variable> variables = new HashMap<String, Variable>();
 
-        ConstraintParser.CassowaryVariableResolver variableResolver = new ConstraintParser.CassowaryVariableResolver() {
+        VariableResolver variableResolver = new VariableResolver() {
 
             @Override
             public Variable resolveVariable(String variableName) {
@@ -65,11 +61,7 @@ public class Benchmarks {
     public static void main(String [ ] args) {
         try {
             testAddingLotsOfConstraints();
-        } catch (DuplicateConstraintException e) {
-            e.printStackTrace();
-        } catch (UnsatisfiableConstraintException e) {
-            e.printStackTrace();
-        } catch (NonlinearExpressionException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
