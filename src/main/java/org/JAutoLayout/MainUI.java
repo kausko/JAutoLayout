@@ -43,8 +43,8 @@ public class MainUI {
         visual_parser_string.setEnabled(true);
         JButton addConstraint = new JButton("Add Constraint");
         addConstraint.addActionListener(e -> onAddConstraintButtonClick());
-        westPanel.add(visual_parser_string);
         westPanel.add(addConstraint);
+        westPanel.add(visual_parser_string);
 
 
         return westPanel;

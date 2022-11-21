@@ -123,48 +123,38 @@ public class AutoLayout implements LayoutManager {
                 var res = parser.parse(userConstraints);
                 int x = 0, y = 0, width = 0, height =0;
                 Solver solver = new Solver();
+
+                // TODO: add the parent's width and height to the solver
                 var map = solver.solve(res, 300, 300);
 
-                for (var entry: map.entrySet()) {
+                // TODO: REMOVE: JSONified output of the map
+//                System.out.println("{");
+//                map.forEach((k, v) -> {
+//                    System.out.println("\"" + k + "\": {");
+//                    v.forEach((k1, v1) -> {
+//                        System.out.println("\"" + k1 + "\": " + v1.getValue() + ",");
+//                    });
+//                    System.out.println("},");
+//                });
+//                System.out.println("}");
 
-                    if(!entry.getKey().equals("container"))
-                    {
+                map.remove("container");
+                map.forEach((k, v) -> {
+                    // TODO: get the component by its name
+                    // var panel = viewNames.get(k);
+                    var panel = new JPanel();
+                    panel.setBackground(Color.blue);
+                    panel.setBounds(
+                            (int) v.get("left").getValue(),
+                            (int) v.get("top").getValue(),
+                            (int) v.get("width").getValue(),
+                            (int) v.get("height").getValue()
+                    );
+                    panel.setToolTipText(k);
+                    System.out.println(k + ": " + panel.getBounds());
+                    parent.add(panel);
+                });
 
-                        HashMap<String, Variable> values = entry.getValue();
-                        for(var constraint : values.entrySet()){
-                            if(constraint.getKey().equals("top"))
-                            {
-                                y = (int)constraint.getValue().getValue();
-                            }
-                            if(constraint.getKey().equals("left"))
-                            {
-                                x = (int) constraint.getValue().getValue();
-                            }
-                            if(constraint.getKey().equals("width"))
-                            {
-                                width = (int) constraint.getValue().getValue();
-                            }
-                            if(constraint.getKey().equals("height"))
-                            {
-                                height = (int) constraint.getValue().getValue();
-                            }
-
-                            System.out.println("coordinate values "+ x + " " + y+ " " + width + " " + height);
-
-                            JPanel panel = new JPanel();
-                            panel.setBorder(BorderFactory.createEmptyBorder(200, 200, 200, 200));
-                            panel.setBackground(Color.blue);
-                            panel.setBounds( x, y, width , height);
-                            parent.add(panel);
-                        }
-
-
-                    }
-                };
-
-
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
