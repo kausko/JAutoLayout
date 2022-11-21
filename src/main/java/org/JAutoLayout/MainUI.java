@@ -49,6 +49,15 @@ public class MainUI {
 
         return westPanel;
     }
+
+    public static JPanel NorthComponent()
+    {
+        JPanel northPanel = new JPanel();
+        JLabel heading = new JLabel("JAutoLayout", SwingConstants.CENTER);
+        heading.setFont(new Font("Serif", Font.PLAIN, 30));
+        northPanel.add(heading);
+        return northPanel;
+    }
     public static void onAddConstraintButtonClick()
     {
 
