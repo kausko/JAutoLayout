@@ -10,18 +10,6 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-//        var parser = new Parser();
-//        var res = parser.parse(Arrays.asList(
-//                    "|-[child1(child3)]-[child3]-|",
-//                    "|-[child2(child4)]-[child4]-|",
-//                    "[child5(child4)]-|",
-//                    "V:|-[child1(child2)]-[child2]-|",
-//                    "V:|-[child3(child4,child5)]-[child4]-[child5]-|"
-//        ));
-//        Solver solver = new Solver();
-//        var map = solver.solve(res, 300, 300);
-//        System.out.println(map);
-
         JFrame frame = new JFrame("Cassowary Constraint Solver");
         frame.setLayout(new BorderLayout());
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
