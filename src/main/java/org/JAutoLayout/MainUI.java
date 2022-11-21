@@ -17,15 +17,17 @@ public class MainUI {
     public static JPanel centerPanel = new JPanel();
     public static JFrame mainFrame ;
 
-    public static JTextField visual_parser_string = new JTextField();
+    public static JTextArea visual_parser_string = new JTextArea(2, 30);
+    public static List<String> constraints = new ArrayList<>();
 
     public MainUI(JFrame frame){
         mainFrame = frame;
     }
     public static JPanel CenterComponent()
     {
-        centerPanel.setLayout(new AutoLayout());
+        centerPanel.setLayout(new AutoLayout(constraints));
         centerPanel.setBackground(Color.PINK);
+        System.out.println("center panel details" + centerPanel.getWidth() +  centerPanel.getHeight());
         return centerPanel;
     }
 
@@ -41,33 +43,17 @@ public class MainUI {
         visual_parser_string.setEnabled(true);
         JButton addConstraint = new JButton("Add Constraint");
         addConstraint.addActionListener(e -> onAddConstraintButtonClick());
-        westPanel.add(addConstraint);
         westPanel.add(visual_parser_string);
+        westPanel.add(addConstraint);
+
 
         return westPanel;
     }
     public static void onAddConstraintButtonClick()
     {
-        String tfString = visual_parser_string.getText();
-        System.out.println(tfString);
-//        List<String> matchList = new ArrayList<String>();
-//        Pattern regex = Pattern.compile("\\((.*?)\\)");
-//        Matcher regexMatcher = regex.matcher(tfString);
-//
-//        while (regexMatcher.find()) {//Finds Matching Pattern in String
-//            matchList.add(regexMatcher.group(1));//Fetching Group from String
-//        }
-//        for(int i = 0; i<= matchList.size(); i++)
-//        {
-//           var something = matchList.get(i).split(":");
-//           System.out.println("something variable values " + something[1] + something[2] + something[3] + something[4]);
-//           JPanel panel = new JPanel();
-//           panel.setBorder(BorderFactory.createEmptyBorder(Integer.parseInt(something[2].substring(1)),  Integer.parseInt(something[3].substring(1)), Integer.parseInt(something[1].substring(1)),  Integer.parseInt(something[3].substring(1))));
-//           panel.setLocation(new Point(Integer.parseInt(something[0].substring(1)), Integer.parseInt(something[1].substring(1))));
-//           centerPanel.add(panel);
-//        }
 
-        mainFrame.getPreferredSize();
+        constraints = Arrays.stream(visual_parser_string.getText().split("\\R")).toList();
+        centerPanel.setLayout(new AutoLayout(constraints));
         mainFrame.revalidate();
         mainFrame.repaint();
     }
