@@ -18,14 +18,15 @@ public class Main {
         frame.setMinimumSize(new Dimension(1500, 100));
 
         MainUI mainUI = new MainUI(frame);
+        var verticalSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, mainUI.WestComponent(), mainUI.CenterComponent());
+        verticalSplitPane.setResizeWeight(0.15);
+        frame.add(verticalSplitPane, BorderLayout.CENTER);
         frame.add(mainUI.NorthComponent(), BorderLayout.NORTH);
-        frame.add(mainUI.CenterComponent(), BorderLayout.CENTER);
-        frame.add(mainUI.WestComponent(), BorderLayout.WEST);
+        //frame.add(mainUI.WestComponent(), BorderLayout.WEST);
 
         frame.pack();
         frame.show();
         frame.setVisible(true);
-        //
 
 
     }

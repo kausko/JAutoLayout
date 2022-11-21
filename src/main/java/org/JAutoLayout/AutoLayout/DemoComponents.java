@@ -1,4 +1,4 @@
-package Demo;
+package org.JAutoLayout.AutoLayout;
 
 import javax.swing.*;
 

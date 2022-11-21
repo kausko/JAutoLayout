@@ -1,5 +1,7 @@
 package Demo;
 
+import org.JAutoLayout.AutoLayout.DemoComponents;
+
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
