@@ -119,7 +119,7 @@ public class Main {
         textAreaScrollPane.setBorder(BorderFactory.createTitledBorder("Add Constraints"));
 
         var horizontalSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, componentsScrollPane, textAreaScrollPane);
-        horizontalSplitPane.setResizeWeight(0.5);
+        horizontalSplitPane.setResizeWeight(0);
 
         var controlPanel = new JPanel(new GridBagLayout());
         var gbc = new GridBagConstraints();
