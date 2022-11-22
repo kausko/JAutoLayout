@@ -1,18 +1,22 @@
 package org.JAutoLayout.AutoLayout;
 
+import org.rekex.helper.anno.Str;
+
 import javax.swing.*;
 
 public class DemoComponents {
 
-    public static JTextField textField = new JTextField("");
-    public static JCheckBox checkBox = new JCheckBox("");
-    public static JRadioButton radioButton = new JRadioButton("");
-    public static JMenuItem menuItem = new JMenuItem("");
-    public static JPasswordField passwordField = new JPasswordField("");
-    public static JToggleButton toggleButton = new JToggleButton("");
-    public static JTextArea textArea = new JTextArea("");
-    public static JLabel label = new JLabel("");
-    public static JButton button = new JButton("");
+    public static String textField = "JTextField";
+    public static String checkBox = "JCheckBox";
+    public static String radioButton = "JRadioButton";
+    public static String menuItem = "JMenuItem";
+    public static String passwordField = "JPasswordField";
+    public static String toggleButton = "JToggleButton";
+    public static String textArea = "JTextArea";
+    public static String label = "JLabel";
+    public static String button = "JButton";
+
+    public static String[] components = {textField,checkBox, radioButton, menuItem, passwordField, toggleButton, textArea, label, button };
 
 
 //    public static JPopupMenu popupMenu = new JPopupMenu("");

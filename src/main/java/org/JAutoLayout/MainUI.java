@@ -15,6 +15,7 @@ import java.awt.event.MouseEvent;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,106 +28,49 @@ public class MainUI {
     private static JPanel constraintPanel = new JPanel();
     public static List<String> constraints = new ArrayList<>();
 
-    private static JComboBox<Field> comboBox;
+    private static JComboBox comboBox;
     private static JButton addButton;
     private static JButton applyButton;
     private static JTextArea textArea;
     private static JPanel displayPanel;
 
-    private static JTable componentsList;
+    private static JPanel componentsList;
     private static DefaultTableModel componentsListModel;
+
+    private static HashMap<String, String> viewNames = new HashMap<String, String>();
 
     public MainUI(JFrame frame) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         mainFrame = frame;
 
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-        comboBox = new JComboBox<>();
+        comboBox = new JComboBox<>(DemoComponents.components);
+        System.out.println(DemoComponents.components.toString());
         addButton = new JButton("Add");
         applyButton = new JButton("Apply constraints");
         textArea = new JTextArea();
         displayPanel = new JPanel();
         componentsListModel = new DefaultTableModel();
         componentsListModel.addColumn("Components");
-        componentsList = new JTable(componentsListModel);
+        componentsList = new JPanel();
         setupListeners();
     }
 
     private void setupListeners() {
-
-        comboBox.setRenderer(new DefaultListCellRenderer() {
-            @Override
-            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                setText(((Field) value).getType().getSimpleName());
-                return this;
-            }
-        });
-
-        componentsList.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                var components =  displayPanel.getComponents();
-                for (Component c : components) {
-                    var co = (JComponent) c;
-                    co.setBorder(null);
-                }
-                int row = componentsList.getSelectedRow();
-                if (row == -1) return;
-                var comp = (JComponent) displayPanel.getComponent(row);
-                comp.setBorder(BorderFactory.createLineBorder(Color.RED));
-            }
-        });
-
-        componentsListModel.addTableModelListener(e -> {
-
-            try {
-                int row = e.getFirstRow();
-                int column = e.getColumn();
-                if (e.getType() != TableModelEvent.UPDATE)
-                    return;
-                var comp = (JComponent) displayPanel.getComponent(row);
-
-                comp
-                        .getClass()
-                        .getMethod("setText", String.class)
-                        .invoke(comp, (String) componentsListModel.getValueAt(row, column));
-
-                comp.setBorder(null);
-                displayPanel.revalidate();
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-        });
-
+        componentsList.setLayout(new BoxLayout(componentsList,  BoxLayout.Y_AXIS));
         addButton.addActionListener(btnEvent -> {
-            Field selectedItem = (Field) comboBox.getSelectedItem();
-            try {
-                assert selectedItem != null;
-                Class<?> type = selectedItem.getType();
-                Object comp = type
-                        .getConstructor(String.class)
-                        .newInstance(type.getSimpleName());
-
-                DefaultTableModel model = (DefaultTableModel) componentsList.getModel();
-                model.addRow(new Object[]{type.getSimpleName()});
-                displayPanel.add((Component) comp);
-                displayPanel.revalidate();
-
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
+            OnAddButtonClick(comboBox);
         });
     }
     public static JPanel CenterComponent()
     {
-        centerPanel.setLayout(new AutoLayout(constraints));
+        centerPanel.setLayout(new AutoLayout(constraints, viewNames));
         centerPanel.setBackground(Color.PINK);
         System.out.println("center panel details" + centerPanel.getWidth() +  centerPanel.getHeight());
         return centerPanel;
     }
 
-    private static void OnComboBoxButtonClick(JComboBox<String> cb)
+    private static void OnAddButtonClick(JComboBox<String> cb)
     {
         JPanel addConstraint = new JPanel();
         addConstraint.setLayout(new FlowLayout());
@@ -135,10 +79,10 @@ public class MainUI {
         removeConstraint.addActionListener(e -> OnRemoveConstraintButtonClick(removeConstraint));
 
         addConstraint.add(new JLabel(cbText));
-        addConstraint.add(new JTextField(20));
+        addConstraint.add(new JTextField(15));
         addConstraint.add(removeConstraint);
 
-        constraintPanel.add(addConstraint);
+        componentsList.add(addConstraint);
         mainFrame.revalidate();
         mainFrame.repaint();
 
@@ -155,8 +99,6 @@ public class MainUI {
 
     public static JPanel WestComponent()
     {
-        Arrays.stream(DemoComponents.class.getFields()).forEach(comboBox::addItem);
-
         var addComboPanel = new JPanel();
         addComboPanel.setBorder(BorderFactory.createTitledBorder("Select Component"));
         addComboPanel.add(comboBox);
@@ -202,8 +144,16 @@ public class MainUI {
     }
     public static void onAddConstraintButtonClick()
     {
+        for(int i = 0; i < componentsList.getComponentCount(); i++)
+        {
+            JPanel ncomp = (JPanel) componentsList.getComponent(i);
+            String compType = ((JLabel)ncomp.getComponent(0)).getText();
+            String variableName = ((JTextField)ncomp.getComponent(1)).getText();
+            viewNames.put(variableName, compType);
+        }
+
         constraints = Arrays.stream(textArea.getText().split("\\R")).toList();
-        centerPanel.setLayout(new AutoLayout(constraints));
+        centerPanel.setLayout(new AutoLayout(constraints, viewNames));
         mainFrame.revalidate();
         mainFrame.repaint();
     }

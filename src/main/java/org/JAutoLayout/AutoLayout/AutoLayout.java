@@ -24,14 +24,15 @@ public class AutoLayout implements LayoutManager {
     private boolean sizeUnknown = true;
 
     private List<String> userConstraints = null;
+    private HashMap<String, String> viewNames = new HashMap<String, String>();
 
-    public AutoLayout() {
-        this(null);
-    }
 
-    public AutoLayout(List<String> constraint) {
+    public AutoLayout(List<String> constraint, HashMap<String, String> viewNamesDetails) {
         userConstraints = constraint;
+        this.viewNames = viewNamesDetails;
     }
+
+
 
     /* Required by LayoutManager. */
     public void addLayoutComponent(String name, Component comp) {
@@ -117,7 +118,7 @@ public class AutoLayout implements LayoutManager {
      * of applets, at least, they probably won't be.
      */
     public void layoutContainer(Container parent) {
-
+            parent.removeAll();
             try {
                 var parser = new Parser();
                 var res = parser.parse(userConstraints);
@@ -141,18 +142,18 @@ public class AutoLayout implements LayoutManager {
                 map.remove("container");
                 map.forEach((k, v) -> {
                     // TODO: get the component by its name
-                    // var panel = viewNames.get(k);
-                    var panel = new JPanel();
-                    panel.setBackground(Color.blue);
-                    panel.setBounds(
+                    Component component = getComponentPerConstraint(k);
+                    component.setBackground(new Color(77, 230, 220));
+                    System.out.println("key details" + k);
+                    component.setBounds(
                             (int) v.get("left").getValue(),
                             (int) v.get("top").getValue(),
                             (int) v.get("width").getValue(),
                             (int) v.get("height").getValue()
                     );
-                    panel.setToolTipText(k);
-                    System.out.println(k + ": " + panel.getBounds());
-                    parent.add(panel);
+
+                    System.out.println(k + ": " + component.getBounds());
+                    parent.add(component);
                 });
 
             } catch (Exception e) {
@@ -160,13 +161,47 @@ public class AutoLayout implements LayoutManager {
             }
 
     }
-    public Map ReadJsonData() throws IOException {
-        final ObjectMapper objectMapper = new ObjectMapper();
-        final Map<String, Map<String, String>> output =
-                objectMapper.readValue(
-                    new File("SampleParserData.json"), new TypeReference<Map<String, Map<String, String>>>() {});
 
-        return output;
+    private Component getComponentPerConstraint(String variable){
+
+        String component = viewNames.get(variable);
+        System.out.println("component details per key" + component);
+        Component displayComp = null;
+
+        if(component.equals(DemoComponents.textField))
+        {
+            displayComp = new TextField(variable);
+        }
+        else if(component.equals(DemoComponents.textArea))
+        {
+            displayComp = new TextArea(variable);
+        }
+        else if(component.equals(DemoComponents.button))
+        {
+            displayComp = new JButton(variable);
+        }
+        else if(component.equals(DemoComponents.radioButton))
+        {
+            displayComp = new JRadioButton(variable);
+        }
+        else if(component.equals(DemoComponents.checkBox))
+        {
+            displayComp = new JCheckBox(variable);
+        }
+        else if(component.equals(DemoComponents.label))
+        {
+            displayComp = new JLabel(variable);
+        }
+        else if(component.equals(DemoComponents.passwordField))
+        {
+            displayComp = new JPasswordField(variable);
+        }
+        else
+        {
+            displayComp = new JMenuItem(variable);
+        }
+
+        return displayComp;
     }
 
 
