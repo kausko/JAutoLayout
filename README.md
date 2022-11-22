@@ -1,2 +1,2 @@
 # JAutoLayout
-cassowary implementation for dynamic layout management
+A constraint-based layout manager for Java Swing that allows you to specify layout using Visual Format Language (VFL).

@@ -1,39 +1,33 @@
-package org.JAutoLayout.AutoLayout;
+package org.JAutoLayout;
 
 import org.JAutoLayout.Toolkit.Solver;
 import org.JAutoLayout.VFLUtils.Parser;
 
-import javax.swing.*;
 import java.awt.*;
 
 import java.util.*;
 import java.util.List;
 
 
-public class AutoLayout implements LayoutManager {
+public class JAutoLayout implements LayoutManager {
     private int vgap;
     private int minWidth = 0, minHeight = 0;
     private int preferredWidth = 0, preferredHeight = 0;
     private boolean sizeUnknown = true;
 
     private List<String> constraints;
-    private Map<String, String> viewNames;
+    private Map<String, Component> viewNames;
 
-    private Parser parser;
-    private Solver solver;
-
-    public AutoLayout() {
+    public JAutoLayout() {
         this(new ArrayList<>(), new HashMap<>());
     }
 
-    public AutoLayout(List<String> constraints, HashMap<String, String> viewNamesDetails) {
+    public JAutoLayout(List<String> constraints, Map<String, Component> viewNames) {
         this.constraints = constraints;
-        this.viewNames = viewNamesDetails;
-        parser = new Parser();
-        solver = new Solver();
+        this.viewNames = viewNames;
     }
 
-    public void setConstraintsAndViews(List<String> constraints, HashMap<String, String> viewNames) {
+    public void setConstraintsAndViews(List<String> constraints, Map<String, Component> viewNames) {
         this.constraints = constraints;
         this.viewNames = viewNames;
     }
@@ -122,13 +116,15 @@ public class AutoLayout implements LayoutManager {
      * of applets, at least, they probably won't be.
      */
     public void layoutContainer(Container parent) {
-            try {
-                var res = parser.parse(constraints);
+        try {
+            var parser = new Parser();
+            var solver = new Solver();
+            var res = parser.parse(constraints);
 
-                // TODO: add the parent's width and height to the solver
-                var map = solver.solve(res, parent.getHeight(), parent.getWidth());
+            // TODO: add the parent's width and height to the solver
+            var map = solver.solve(res, parent.getHeight(), parent.getWidth());
 
-                // TODO: REMOVE: JSONified output of the map
+            // TODO: REMOVE: JSONified output of the map
 //                System.out.println("{");
 //                map.forEach((k, v) -> {
 //                    System.out.println("\"" + k + "\": {");
@@ -139,72 +135,29 @@ public class AutoLayout implements LayoutManager {
 //                });
 //                System.out.println("}");
 
-                map.remove("container");
-                map.forEach((k, v) -> {
-                    var component = viewNames.get(k);
-                    // TODO: get the component by its name
-//                    Component component = getComponentPerConstraint(k);
+            map.remove("container");
+            map.forEach((k, v) -> {
+                var component = viewNames.get(k);
+                // TODO: get the component by its name
+
 //                    component.setBackground(new Color(77, 230, 220));
 //                    System.out.println("key details" + k);
-//                    component.setBounds(
-//                            (int) v.get("left").getValue(),
-//                            (int) v.get("top").getValue(),
-//                            (int) v.get("width").getValue(),
-//                            (int) v.get("height").getValue()
-//                    );
+                component.setBounds(
+                        (int) v.get("left").getValue(),
+                        (int) v.get("top").getValue(),
+                        (int) v.get("width").getValue(),
+                        (int) v.get("height").getValue()
+                );
 //
 //                    System.out.println(k + ": " + component.getBounds());
 //                    parent.add(component);
-                });
+            });
 
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
-
-    private Component getComponentPerConstraint(String variable){
-
-        String component = viewNames.get(variable);
-        System.out.println("component details per key" + component);
-        Component displayComp = null;
-
-        if(component.equals(DemoComponents.textField))
-        {
-            displayComp = new TextField(variable);
-        }
-        else if(component.equals(DemoComponents.textArea))
-        {
-            displayComp = new TextArea(variable);
-        }
-        else if(component.equals(DemoComponents.button))
-        {
-            displayComp = new JButton(variable);
-        }
-        else if(component.equals(DemoComponents.radioButton))
-        {
-            displayComp = new JRadioButton(variable);
-        }
-        else if(component.equals(DemoComponents.checkBox))
-        {
-            displayComp = new JCheckBox(variable);
-        }
-        else if(component.equals(DemoComponents.label))
-        {
-            displayComp = new JLabel(variable);
-        }
-        else if(component.equals(DemoComponents.passwordField))
-        {
-            displayComp = new JPasswordField(variable);
-        }
-        else
-        {
-            displayComp = new JMenuItem(variable);
-        }
-
-        return displayComp;
-    }
-
 
     public String toString() {
         String str = "";

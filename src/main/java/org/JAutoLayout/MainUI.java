@@ -8,17 +8,10 @@ import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static javax.swing.SwingConstants.CENTER;
 
@@ -45,7 +38,6 @@ public class MainUI {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
         comboBox = new JComboBox<>(DemoComponents.components);
-        System.out.println(DemoComponents.components.toString());
         addButton = new JButton("Add");
         applyButton = new JButton("Apply constraints");
         textArea = new JTextArea();
@@ -66,7 +58,6 @@ public class MainUI {
     {
         centerPanel.setLayout(new AutoLayout(constraints, viewNames));
         centerPanel.setBackground(Color.PINK);
-        System.out.println("center panel details" + centerPanel.getWidth() +  centerPanel.getHeight());
         return centerPanel;
     }
 
@@ -75,7 +66,7 @@ public class MainUI {
         JPanel addConstraint = new JPanel();
         addConstraint.setLayout(new FlowLayout());
         String cbText = cb.getSelectedItem().toString();
-        JButton removeConstraint = new JButton("Remove Constraint");
+        JButton removeConstraint = new JButton("Remove Component");
         removeConstraint.addActionListener(e -> OnRemoveConstraintButtonClick(removeConstraint));
 
         addConstraint.add(new JLabel(cbText));

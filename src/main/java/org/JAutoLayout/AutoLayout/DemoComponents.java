@@ -3,6 +3,8 @@ package org.JAutoLayout.AutoLayout;
 import org.rekex.helper.anno.Str;
 
 import javax.swing.*;
+import java.awt.*;
+import java.util.Map;
 
 public class DemoComponents {
 
@@ -15,6 +17,19 @@ public class DemoComponents {
     public static String textArea = "JTextArea";
     public static String label = "JLabel";
     public static String button = "JButton";
+
+
+    public static Map<String, Component> componentMap = Map.of(
+            textField, new JTextField(),
+            checkBox, new JCheckBox(),
+            radioButton, new JRadioButton(),
+            menuItem, new JMenuItem(),
+            passwordField, new JPasswordField(),
+            toggleButton, new JToggleButton(),
+            textArea, new JTextArea(),
+            label, new JLabel(),
+            button, new JButton()
+    );
 
     public static String[] components = {textField,checkBox, radioButton, menuItem, passwordField, toggleButton, textArea, label, button };
 
