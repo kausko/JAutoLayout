@@ -10,9 +10,6 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by alex on 20/11/2014.
- */
 public class RealWorldTests {
 
     private static double EPSILON = 1.0e-2;
@@ -181,6 +178,8 @@ public class RealWorldTests {
                     }
                 } catch(ConstraintException e) {
                     e.printStackTrace();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
 
                 return null;

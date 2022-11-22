@@ -15,7 +15,7 @@ public class Tests {
         Variable x = new Variable("x");
 
 
-        solver.addConstraint(Operations.equals(Operations.add(x, 2), 20));
+        solver.addConstraint(Operations.equals(Operations.add(x, 2.0), 20.0));
 
         solver.updateVariables();
 
@@ -28,9 +28,9 @@ public class Tests {
         Variable x = new Variable("x");
         Variable y = new Variable("y");
 
-        solver.addConstraint(Operations.equals(x, 20));
+        solver.addConstraint(Operations.equals(x, 20.0));
 
-        solver.addConstraint(Operations.equals(Operations.add(x, 2), Operations.add(y, 10)));
+        solver.addConstraint(Operations.equals(Operations.add(x, 2.0), Operations.add(y, 10.0)));
 
         solver.updateVariables();
 
@@ -77,7 +77,7 @@ public class Tests {
         Variable x = new Variable("x");
         Solver solver = new Solver();
 
-        solver.addConstraint(Operations.lessThanOrEqualTo(x, 100).setStrength(Strength.WEAK));
+        solver.addConstraint(Operations.lessThanOrEqualTo(x, 100.0).setStrength(Strength.WEAK));
 
         solver.updateVariables();
         assertEquals(100, x.getValue(), EPSILON);
@@ -126,8 +126,8 @@ public class Tests {
         Variable y = new Variable("y");
         Solver solver = new Solver();
 
-        solver.addConstraint(Operations.equals(x, 100).setStrength(Strength.WEAK));
-        solver.addConstraint(Operations.equals(y, 120).setStrength(Strength.STRONG));
+        solver.addConstraint(Operations.equals(x, 100.0).setStrength(Strength.WEAK));
+        solver.addConstraint(Operations.equals(y, 120.0).setStrength(Strength.STRONG));
 
         Constraint c10 = Operations.lessThanOrEqualTo(x, 10.0);
         Constraint c20 = Operations.lessThanOrEqualTo(x, 20.0);

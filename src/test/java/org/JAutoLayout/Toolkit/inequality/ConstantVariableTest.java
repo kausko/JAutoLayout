@@ -10,9 +10,7 @@ import org.JAutoLayout.Toolkit.Variable;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by alex on 31/01/16.
- */
+
 public class ConstantVariableTest {
 
     private static double EPSILON = 1.0e-8;
