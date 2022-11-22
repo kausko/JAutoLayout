@@ -515,6 +515,20 @@ public class Solver {
                 .allMatch(s -> s.getType() == Symbol.Type.DUMMY);
     }
 
+    public void addStayConstraint(Variable variable) throws ConstraintException {
+        addStayConstraint(variable, Strength.WEAK, 1.0);
+    }
+
+    public void addStayConstraint(Variable variable, double strength, double weight) throws ConstraintException {
+        addConstraint(
+                new Constraint(
+                        new Expression(new Term(variable), weight),
+                        Relation.EQ,
+                        strength
+                )
+        );
+    }
+
     public HashMap<String, HashMap<String, Variable>> solve(List<String> constraints, Integer height, Integer width) throws Exception {
         HashMap<String, HashMap<String, Variable>> result = new HashMap<>();
         var variableSolver = new VariableResolver() {
