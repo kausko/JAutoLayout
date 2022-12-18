@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5d845376-c9c6-4f52-89f7-2eae39645744" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleParserData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Demo/DemoComponents.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Demo/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Demo/UI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/AutoLayout/AutoLayout.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/AutoLayout/Constraint.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/AutoLayout/DemoComponents.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/JAutoLayout.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/MainUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Constraint.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/ConstraintException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/ConstraintParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Expression.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Operations.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Relation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Row.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Solver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Strength.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Symbol.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Term.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Utils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Variable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/VariableResolver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/VFLUtils/ASTReducer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/VFLUtils/Grammar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/VFLUtils/Parser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/VFLUtils/PegParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/JAutoLayout/Toolkit/Benchmarks.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/JAutoLayout/Toolkit/RealWorldTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/JAutoLayout/Toolkit/Tests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/JAutoLayout/Toolkit/inequality/ConstantVariableTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/JAutoLayout/Toolkit/inequality/ExpressionVariableTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/JAutoLayout/Toolkit/inequality/VariableConstantTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/JAutoLayout/Toolkit/inequality/VariableExpression.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/JAutoLayout/Toolkit/inequality/VariableVariableTest.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="JAutoLayout" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Record" />
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2H6NznFZZTx2EEFNh1SZZgmzTk5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Study/GT/Fall22/UISW/Project/JAutoLayout/src/main/java/org/JAutoLayout/Parser&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.JAutoLayout.Toolkit.Exceptions" />
+      <recent name="org.JAutoLayout.Toolkit" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Study\GT\Fall22\UISW\Project\JAutoLayout\src\main\java\org\JAutoLayout\Parser" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Study\GT\Fall22\UISW\Project\JAutoLayout\src\main\java\org\JAutoLayout\Parser\canopy" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="org.JAutoLayout.Toolkit" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.JAutoLayout" />
+      <recent name="org.JAutoLayout.Toolkit" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5d845376-c9c6-4f52-89f7-2eae39645744" name="Changes" comment="" />
+      <created>1667601841446</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667601841446</updated>
+      <workItem from="1667601843207" duration="2871000" />
+      <workItem from="1667678159888" duration="12849000" />
+      <workItem from="1667862021720" duration="4943000" />
+      <workItem from="1668013255723" duration="1087000" />
+      <workItem from="1668036539547" duration="5036000" />
+      <workItem from="1668135145129" duration="5730000" />
+      <workItem from="1668233664411" duration="1002000" />
+      <workItem from="1668241513634" duration="4635000" />
+      <workItem from="1668278956217" duration="4052000" />
+      <workItem from="1668297394449" duration="10197000" />
+      <workItem from="1668380130984" duration="283000" />
+      <workItem from="1668464741522" duration="1609000" />
+      <workItem from="1668636819372" duration="7822000" />
+      <workItem from="1668663857354" duration="10119000" />
+      <workItem from="1668697410722" duration="189000" />
+      <workItem from="1668702518641" duration="5179000" />
+      <workItem from="1668719334148" duration="9479000" />
+      <workItem from="1668831016479" duration="23929000" />
+      <workItem from="1668978853040" duration="17953000" />
+      <workItem from="1669011699764" duration="13401000" />
+      <workItem from="1669072193833" duration="5660000" />
+      <workItem from="1669081857282" duration="7160000" />
+      <workItem from="1669089618606" duration="14787000" />
+      <workItem from="1670337515249" duration="2371000" />
+      <workItem from="1671146611951" duration="74000" />
+      <workItem from="1671146811391" duration="812000" />
+      <workItem from="1671363325593" duration="7400000" />
+      <workItem from="1671373587988" duration="96000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
