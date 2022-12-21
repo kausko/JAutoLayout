@@ -1,7 +1,7 @@
 package org.JAutoLayout;
 
-import org.JAutoLayout.Toolkit.Solver;
-import org.JAutoLayout.Toolkit.Variable;
+import no.birkett.kiwi.Variable;
+import org.JAutoLayout.SolverUtils.Solver;
 import org.JAutoLayout.VFL.Parser;
 
 import java.awt.*;
@@ -131,10 +131,9 @@ public class JAutoLayout implements LayoutManager {
     public void layoutContainer(Container parent) {
         try {
             var parser = new Parser(spacing);
-            var solver = new Solver();
             var res = parser.parse(constraints);
-
-            var map = solver.solve(res, parent.getHeight(), parent.getWidth());
+            var solver = new Solver(parent.getWidth(), parent.getHeight());
+            var map = solver.solve(res);
 
             map.remove("container");
             map.forEach((k, v) -> {

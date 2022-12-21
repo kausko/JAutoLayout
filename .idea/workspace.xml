@@ -5,50 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d845376-c9c6-4f52-89f7-2eae39645744" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SampleParserData.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Demo/DemoComponents.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Demo/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Demo/UI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/AutoLayout/AutoLayout.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/AutoLayout/Constraint.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/AutoLayout/DemoComponents.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/JAutoLayout.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/MainUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Constraint.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/ConstraintException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/ConstraintParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Expression.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Operations.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Relation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Row.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Solver.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Strength.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Symbol.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Term.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Utils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/Variable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/Toolkit/VariableResolver.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/VFLUtils/ASTReducer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/VFLUtils/Grammar.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/VFLUtils/Parser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JAutoLayout/VFLUtils/PegParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/JAutoLayout/Toolkit/Benchmarks.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/JAutoLayout/Toolkit/RealWorldTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/JAutoLayout/Toolkit/Tests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/JAutoLayout/Toolkit/inequality/ConstantVariableTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/JAutoLayout/Toolkit/inequality/ExpressionVariableTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/JAutoLayout/Toolkit/inequality/VariableConstantTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/JAutoLayout/Toolkit/inequality/VariableExpression.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/JAutoLayout/Toolkit/inequality/VariableVariableTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/demo/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jautolayout/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/jautolayout/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jautolayout/src/main/java/org/JAutoLayout/JAutoLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/jautolayout/src/main/java/org/JAutoLayout/JAutoLayout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,12 +26,21 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/jautolayout">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/kiwi">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="JAutoLayout" type="f1a62948:ProjectNode" />
+                <item name="jautolayout" type="f1a62948:ProjectNode" />
               </path>
             </expand>
             <select />
@@ -100,6 +72,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2H6NznFZZTx2EEFNh1SZZgmzTk5" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -108,17 +83,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Study/GT/Fall22/UISW/Project/JAutoLayout/src/main/java/org/JAutoLayout/Parser&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "full.screen.before.presentation.mode": "false",
+    "last_opened_file_path": "D:/Study/GT/Fall22/UISW/Project/JAutoLayout/src/main/java/org/JAutoLayout/Parser",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "advanced.settings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="org.JAutoLayout.Toolkit.Exceptions" />
@@ -137,6 +115,125 @@
       <recent name="org.JAutoLayout" />
       <recent name="org.JAutoLayout.Toolkit" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.JAutoLayout.SolverUtils" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="JAutoLayout [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="assemble" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="JAutoLayout:jautolayout [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/jautolayout" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="JAutoLayout:jautolayout [publishToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/jautolayout" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="publishToMavenLocal" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="JAutoLayout:kiwi [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/kiwi" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="assemble" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="JAutoLayout:kiwi [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/kiwi" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.JAutoLayout:kiwi [assemble]" />
+        <item itemvalue="Gradle.JAutoLayout:kiwi [build]" />
+        <item itemvalue="Gradle.JAutoLayout:jautolayout [build]" />
+        <item itemvalue="Gradle.JAutoLayout [assemble]" />
+        <item itemvalue="Gradle.JAutoLayout:jautolayout [publishToMavenLocal]" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -173,7 +270,8 @@
       <workItem from="1671146611951" duration="74000" />
       <workItem from="1671146811391" duration="812000" />
       <workItem from="1671363325593" duration="7400000" />
-      <workItem from="1671373587988" duration="96000" />
+      <workItem from="1671373587988" duration="2276000" />
+      <workItem from="1671611492990" duration="12296000" />
     </task>
     <servers />
   </component>

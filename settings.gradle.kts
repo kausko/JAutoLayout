@@ -1,2 +1,2 @@
-rootProject.name = "JAutoLayout"
+rootProject.name = "jautolayout"
 include("jautolayout", "demo")

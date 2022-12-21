@@ -1,11 +1,12 @@
-import org.gradle.api.internal.file.pattern.PatternMatcherFactory.compile
-
 plugins {
     id("java")
 }
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri("https://jitpack.io")
+    }
 }
 
 dependencies {
