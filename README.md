@@ -30,11 +30,14 @@ Then, add the following to the `dependencies` section:
 
 **Notes:**
 - Only works with Java 17 and above
+- The `master-SNAPSHOT` version is the latest commit on the master branch. It can be replaced with a specific commit hash or tag.
 - For Kotlin DSL, use `url = uri("https://jitpack.io")` and `implementation(...)`.
 
 ## Usage
     
 ```java
+import org.JAutoLayout.JAutoLayout;
+
 public class Example {
     public static void main(String[] args) {
         // ...
@@ -61,4 +64,4 @@ public class Example {
 }
 ```
 
-*Check out the demo folder for an interactive example.*
+*An interactive playground is available in the demo directory.*

@@ -69,7 +69,7 @@ public class UI {
         deleteButton.addActionListener(this::onDeleteButtonClick);
         applyButton.addActionListener(e -> {
             try {
-                onApplyButtonClick(e);
+                onApplyButtonClick();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -79,7 +79,8 @@ public class UI {
     private void onAddButtonClick(ActionEvent actionEvent) {
         Field selectedItem = (Field) comboBox.getSelectedItem();
         try {
-            assert selectedItem != null;
+            if (selectedItem == null)
+                throw new Exception("No component selected");
             Class<?> type = selectedItem.getType();
             Object comp = type
                     .getConstructor()
@@ -87,11 +88,8 @@ public class UI {
 
             DefaultTableModel model = (DefaultTableModel) componentsList.getModel();
             var compType = type.getSimpleName();
-            var compName = compType + model.getRowCount();
+            var compName = compType.concat(String.valueOf(model.getRowCount()));
             model.addRow(new Object[]{compType, compName, comp});
-//                viewNames.put(compName, (Component) comp);
-//                displayPanel.add((Component) comp);
-//                displayPanel.revalidate();
 
         } catch (Exception ex) {
             throw new RuntimeException(ex);
@@ -104,7 +102,7 @@ public class UI {
         componentsListModel.removeRow(row);
     }
 
-    private void onApplyButtonClick(ActionEvent actionEvent) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    private void onApplyButtonClick() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         var constraints = Arrays.stream(textArea.getText().split("\\R")).toList();
         Map<String, Component> viewNames = new HashMap<>();
         for (int i = 0; i < componentsListModel.getRowCount(); i++) {
