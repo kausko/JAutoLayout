@@ -12,7 +12,7 @@ repositories {
 
 dependencies {
 //    implementation(project(":jautolayout"))
-    implementation("com.github.kausko:JAutoLayout:513e75bc79")
+    implementation("com.github.kausko:JAutoLayout:main-SNAPSHOT")
 }
 
 //tasks.jar {

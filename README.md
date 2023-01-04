@@ -1,4 +1,7 @@
 # JAutoLayout
+
+[![](https://jitpack.io/v/kausko/JAutoLayout.svg)](https://jitpack.io/#kausko/JAutoLayout)
+
 A constraint-based layout manager that allows you to lay out components in (Java) Swing using [Apple's Visual Format Language (VFL)](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html).
 
 ## Installation
@@ -14,9 +17,9 @@ In `pom.xml`, add the following at the end of the `<repositories>` section:
 Then, add the following to the `<dependencies>` section:
 
     <dependency>
-        <groupId>com.github.kausko.JAutoLayout</groupId>
-        <artifactId>jautolayout</artifactId>
-        <version>master-SNAPSHOT</version>
+        <groupId>com.github.kausko</groupId>
+        <artifactId>Jautolayout</artifactId>
+        <version>main-SNAPSHOT</version>
     </dependency>
 
 ### Gradle
@@ -26,11 +29,11 @@ In `build.gradle`, add the following at the end of the `repositories` section:
 
 Then, add the following to the `dependencies` section:
 
-    implementation 'com.github.kausko.JAutoLayout:jautolayout:master-SNAPSHOT'
+    implementation 'com.github.kausko.JAutoLayout:main-SNAPSHOT'
 
 **Notes:**
 - Only works with Java 17 and above
-- The `master-SNAPSHOT` version is the latest commit on the master branch. It can be replaced with a specific commit hash or tag.
+- The `main-SNAPSHOT` version is the latest commit on the main branch. It can be replaced with a specific commit hash or tag.
 - For Kotlin DSL, use `url = uri("https://jitpack.io")` and `implementation(...)`.
 
 ## Usage
