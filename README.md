@@ -2,7 +2,7 @@
 
 [![](https://jitpack.io/v/kausko/JAutoLayout.svg)](https://jitpack.io/#kausko/JAutoLayout)
 
-A constraint-based layout manager that allows you to lay out components in (Java) Swing using [Apple's Visual Format Language (VFL)](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html).
+JAutoLayout is a constraint-based layout management library based on the [kiwi](https://github.com/kausko/kiwi-java) implementation of the [Cassowary  linear arithmetic constraint-solving algorithm](https://constraints.cs.washington.edu/solvers/cassowary-tochi.pdf). It allows you to lay out components in (Java) Swing using [Apple's Visual Format Language (VFL)](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html).
 
 ## Installation
 
