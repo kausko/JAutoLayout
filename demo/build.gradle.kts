@@ -11,16 +11,5 @@ repositories {
 }
 
 dependencies {
-//    implementation(project(":jautolayout"))
-    implementation("com.github.kausko:JAutoLayout:main-SNAPSHOT")
+   implementation(project(":jautolayout"))
 }
-
-//tasks.jar {
-//    manifest.attributes["Main-Class"] = "Demo"
-//    manifest.attributes["Class-Path"] = configurations
-//        .runtimeClasspath
-//        .get()
-//        .joinToString(separator = " ") { file ->
-//            "libs/${file.name}"
-//        }
-//}
