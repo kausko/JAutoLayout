@@ -19,7 +19,7 @@ Then, add the following to the `<dependencies>` section:
     <dependency>
         <groupId>com.github.kausko</groupId>
         <artifactId>Jautolayout</artifactId>
-        <version>main-SNAPSHOT</version>
+        <version>-SNAPSHOT</version>
     </dependency>
 
 ### Gradle
@@ -29,11 +29,11 @@ In `build.gradle`, add the following at the end of the `repositories` section:
 
 Then, add the following to the `dependencies` section:
 
-    implementation 'com.github.kausko.JAutoLayout:main-SNAPSHOT'
+    implementation 'com.github.kausko.JAutoLayout:-SNAPSHOT'
 
 **Notes:**
 - Only works with Java 17 and above
-- The `main-SNAPSHOT` version is the latest commit on the main branch. It can be replaced with a specific commit hash or tag.
+- The `-SNAPSHOT` version is the latest commit on the main branch. It can be replaced with a specific commit hash or tag.
 - For Kotlin DSL, use `url = uri("https://jitpack.io")` and `implementation(...)`.
 
 ## Usage
@@ -67,4 +67,7 @@ public class Example {
 }
 ```
 
-*An interactive playground is available in the demo directory.*
+## Examples
+
+- With [Swing](https://github.com/kausko/JAutoLayout/tree/main/demo)
+- With [Vaadin](https://github.com/kausko/jautolayout-demo) (and other Java GUI frameworks)
